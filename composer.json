@@ -12,5 +12,33 @@
       "homepage": "https://daniel.kuruc.dev/",
       "role": "Developer"
     }
-  ]
+  ],
+  "require": {
+    "johnpbloch/wordpress-core-installer": "^2.0",
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "composer",
+      "url": "https://wp-languages.github.io"
+    }
+  ],
+  "extra": {
+    "dropin-paths": {
+      "src/languages/": ["vendor:koodimonni-language"],
+      "src/languages/plugins/": ["vendor:koodimonni-plugin-language"],
+      "src/languages/themes/": ["vendor:koodimonni-theme-language"]
+    },
+    "installer-paths": {
+      "src/plugins/{$name}/": ["type:wordpress-plugin"],
+      "src/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "wordpress-install-dir": "src/wordpress"
+  }
 }
