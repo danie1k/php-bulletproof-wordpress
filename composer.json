@@ -1,0 +1,16 @@
+{
+  "name": "danie1k/bulletproof-wordpress",
+  "homepage": "https://github.com/danie1k/php-bulletproof-wordpress",
+  "description": "Wordpress deployment automation based on Ansible & Composer",
+  "readme": "README.md",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Kuruc",
+      "email": "daniel@kuruc.dev",
+      "homepage": "https://daniel.kuruc.dev/",
+      "role": "Developer"
+    }
+  ]
+}
