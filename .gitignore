@@ -526,11 +526,13 @@ MigrationBackup/
 
 # End of https://www.gitignore.io/api/eclipse,netbeans,composer,intellij+all,visualstudio
 
-src/languages/*
-!src/languages/.gitkeep
-src/plugins/*
-!src/plugins/.gitkeep
-src/themes/*
-!src/themes/.gitkeep
-src/wordpress/*
-!src/wordpress/.gitkeep
+languages/*
+!languages/.gitkeep
+mu-plugins/*
+!mu-plugins/.gitkeep
+plugins/*
+!plugins/.gitkeep
+themes/*
+!themes/.gitkeep
+wordpress/*
+!wordpress/.gitkeep

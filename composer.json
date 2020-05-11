@@ -13,40 +13,13 @@
       "role": "Developer"
     }
   ],
-  "require": {
-    "composer-plugin-api": "^1.0",
-    "composer/installers": "^1.9",
-    "drupal-composer/preserve-paths": "^0.1.5",
-    "johnpbloch/wordpress-core": "^5.4",
-    "johnpbloch/wordpress-core-installer": "^2.0",
-    "mnsami/composer-custom-directory-installer": "^1.1",
-    "wpackagist-plugin/stops-core-theme-and-plugin-updates": "^9.0"
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.16"
   },
   "prefer-stable": true,
   "minimum-stability": "dev",
   "config": {
-    "sort-packages": true
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org"
-    },
-    {
-      "type": "composer",
-      "url": "https://wp-languages.github.io"
-    }
-  ],
-  "extra": {
-    "dropin-paths": {
-      "src/languages/": ["vendor:koodimonni-language"],
-      "src/languages/plugins/": ["vendor:koodimonni-plugin-language"],
-      "src/languages/themes/": ["vendor:koodimonni-theme-language"]
-    },
-    "installer-paths": {
-      "src/plugins/{$name}/": ["type:wordpress-plugin"],
-      "src/themes/{$name}/": ["type:wordpress-theme"]
-    },
-    "wordpress-install-dir": "src/wordpress"
+    "sort-packages": true,
+    "vendor-dir": "vendor"
   }
 }
