@@ -1,0 +1,90 @@
+---
+
+- pause:
+    prompt: |-
+                                ╓─────────────────────────╖
+      ╒═════════════════════════╣ DEPLOYMENT CONFIRMATION ╠═════════════════════════
+      │                         ╙─────────────────────────╜
+      │
+      │ Following local paths  will be uploaded to your remote server.
+      │ Please make sure everything is correct before proceeding.
+      │
+      │ Warning! All remote files will be overwritten if target path exist.
+      │
+      ├─┬───────────────────────────╼ Languages: {{ dest_languages }}
+      │ ├> {{ src_languages_bfwp }}*
+      │ └> {{ src_languages_user }}*
+      │
+      ├─┬──────────────────────────╼ MU Plugins: {{ dest_mu_plugins }}
+      │ ├> {{ src_mu_plugins_bfwp }}*
+      │ └> {{ src_mu_plugins_user }}*
+      │
+      ├─┬─────────────────────────────╼ Plugins: {{ dest_plugins }}
+      │ ├> {{ src_plugins_bfwp }}*
+      │ └> {{ src_plugins_user }}*
+      │
+      ├─┬──────────────────────────────╼ Themes: {{ dest_themes }}
+      │ ├> {{ src_themes_bfwp }}*
+      │ └> {{ src_themes_user }}*
+      │
+      ├─┬──────────────────────╼ Wordpress Core: {{ dest_wordpress }}
+      │ └> {{ src_wordpress_bfwp }}*
+      │
+      ├─┬─────────────────────╼ Composer Vendor: {{ dest_wordpress }}
+      │ └> {{ src_wordpress_bfwp }}*
+      │
+      ├─┬─────────────────────╼ Composer Vendor: {{ dest_vendor }}
+      │ └> {{ src_vendor_user }}*
+      │
+      ├──╼ Wordpress Admin dir: {{ dest_wpadmin }}
+      │
+      └─────────────────────────────────────────────────────────────────────────────
+
+      Type "yes" to begin deployment
+  register: user_confirmation
+
+- fail: msg="Interrupted by user! Exiting."
+  when: user_confirmation.user_input != 'yes'
+
+- name: "BPWP | Ensure remote directories exist before uploading"
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ bpwp_remote_wordpress_home_dir }}"
+    - "{{ dest_languages }}"
+    - "{{ dest_mu_plugins }}"
+    - "{{ dest_plugins }}"
+    - "{{ dest_themes }}"
+    - "{{ dest_wordpress }}"
+    - "{{ dest_vendor }}"
+
+- include_tasks: upload-files
+  with_items:
+    # languages
+    - src: "{{ src_languages_bfwp }}"
+      dest: "{{ dest_languages }}"
+    - src: "{{ src_languages_user }}"
+      dest: "{{ dest_languages }}"
+    # mu-plugins
+    - src: "{{ src_mu_plugins_bfwp }}"
+      dest: "{{ dest_mu_plugins}}"
+    - src: "{{ src_mu_plugins_user }}"
+      dest: "{{ dest_mu_plugins}}"
+    # plugins
+    - src: "{{ src_plugins_bfwp }}"
+      dest: "{{ dest_plugins }}"
+    - src: "{{ src_plugins_user }}"
+      dest: "{{ dest_plugins }}"
+    # themes
+    - src: "{{ src_themes_bfwp }}"
+      dest: "{{ dest_themes }}"
+    - src: "{{ src_themes_user }}"
+      dest: "{{ dest_themes }}"
+    # wordpress
+    - src: "{{ src_wordpress_bfwp }}"
+      dest: "{{ dest_wordpress }}"
+    # vendor
+    - src: "{{ src_vendor_user }}"
+      dest: "{{ dest_vendor }}"
+

@@ -1,0 +1,28 @@
+---
+
+- name: "BPWP | Sending '{{ item.dest }}' to remote server..."
+  synchronize:
+    archive: false
+    compress: true
+    copy_links: false
+    delete: false
+    dest: "{{ item.dest }}"
+    dirs: false
+    existing_only: false
+    links: false
+    mode: push
+    partial: false
+    recursive: true
+    src: "{{ item.src }}"
+    times: true
+    verify_host: true
+    rsync_opts:
+      - "-zz"
+  when: not (bpwp_sync_method is defined) or bpwp_sync_method == 'rsync'
+
+- name: "BPWP | Sending '{{ item.dest }}' to remote server..."
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: true
+  when: bpwp_sync_method == 'native'

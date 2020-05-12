@@ -11,6 +11,13 @@ if ! [[ ${project_name} =~ ^[a-z0-9_.-]+$ ]]; then
     echo -e "\033[0;31mERROR: Project name is invalid!\033[0m Exiting." && exit 1
 fi
 
+printf "\033[0;32mFull public URL your new project (can be changed later)?\033[0m "
+read project_url
+
+if ! [[ ${project_url} =~ ^http ]]; then
+    echo -e "\033[0;31mERROR: URL is invalid!\033[0m Exiting." && exit 1
+fi
+
 printf "\033[0;32mWhere do you want to create project?\033[0m [DEFAULT: ${cwd}] "
 read project_home
 
@@ -108,6 +115,19 @@ for item in "${the_mkdir[@]}"; do
     mkdir -p ${item}
     touch ${item}/.gitkeep
 done
+printf "\033[0;32m OK!\e[0m\n"
+
+
+printf ">>> \033[0;33mSet up Ansible files...\033[0m"
+curl -s -o ansible.cfg https://raw.githubusercontent.com/danie1k/php-bulletproof-wordpress/dev/ansible/ansible.cfg
+curl -s -o ansible.yml https://raw.githubusercontent.com/danie1k/php-bulletproof-wordpress/dev/ansible/ansible.yml
+curl -s -o ansible-inventory https://raw.githubusercontent.com/danie1k/php-bulletproof-wordpress/dev/ansible/ansible-inventory
+
+sed -i 's/bpwp-placeholder/'${project_name}'/g' ansible.yml
+sed -i 's/bpwp-placeholder/'${project_name}'/g' ansible-inventory
+sed -i 's/bpwp-url-placeholder/'${project_url}'/g' ansible.yml
+
+printf '\n/*inventory*\n' >> .gitignore
 printf "\033[0;32m OK!\e[0m\n"
 
 printf "\nAll done!\n"
