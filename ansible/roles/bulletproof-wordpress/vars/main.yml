@@ -21,9 +21,9 @@ src_wordpress_bfwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_wordpress }}/"
 src_vendor_user: "{{ playbook_dir }}/{{ bpwp_dir_vendor }}/"
 
 dest_languages: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_languages }}/"
-dest_mu_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_mu_plugins }}/"
-dest_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_dir_plugins }}/"
-dest_themes: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_dir_themes }}/"
+dest_mu_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_mu_plugins_dir_name }}/"
+dest_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_plugins_dir_name }}/"
+dest_themes: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_themes_dir_name }}/"
 dest_wordpress: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_wordpress }}/"
 dest_vendor: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_vendor }}/"
 

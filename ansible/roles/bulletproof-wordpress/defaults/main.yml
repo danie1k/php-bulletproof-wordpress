@@ -5,8 +5,16 @@ bpwp_db_collate: utf8mb4_bin
 bpwp_db_table_prefix: wp_
 bpwp_db_client_flags: false
 
+bpwp_wp_uploads_dir_name: uploads
+bpwp_wp_plugins_dir_name: plugins
+bpwp_wp_themes_dir_name: themes
+bpwp_wp_mu_plugins_dir_name: mu-plugins
+
 bpwp_smtp_enabled: true
 bpwp_smtp_mail_from_force: false
 bpwp_smtp_mail_from_name_force: false
 bpwp_smtp_set_return_path: true
 bpwp_smtp_mailer: php
+
+bpwp_wp_disallow_file_edit: true
+bpwp_wp_disallow_file_mods: true

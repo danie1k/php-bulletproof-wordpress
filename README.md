@@ -7,7 +7,9 @@ Bulletproof* Wordpress deployment automation based on Ansible & Composer
     1. [Database settings](#database-settings)
     2. [Secret keys](#secret-keys)
 3. [Extended Wordpress Configuration](#extended-wordpress-configuration)
-    1. [Cron](#cron)
+    1. [HTTPS detection mechanism](#https-detection-mechanism)
+    2. [Paths customization](#paths-customization)
+    3. [Cron](#cron)
 4. [SMTP Configuration](#smtp-configuration)
     1. [Global settings](#global-settings)
     2. [Mailer-specific settings](#mailer-specific-settings)
@@ -18,7 +20,8 @@ Bulletproof* Wordpress deployment automation based on Ansible & Composer
         5. [Mailgun](#mailgun)
         6. [SendGrid](#sendgrid)
         7. [Classic SMTP server](#classic-smtp-server)
-4. [License](#license)
+5. [Advanced options](#advanced-options)
+6. [License](#license)
 
 ## Installation
 To begin run the following command in Bash-compatible terminal:
@@ -59,6 +62,36 @@ bash <(curl -s https://raw.githubusercontent.com/danie1k/php-bulletproof-wordpre
 
 ## Extended Wordpress Configuration
 
+### HTTPS detection mechanism
+Select how WordPress should detect that a page is loaded via HTTPS, it strongly depends on your web server & DNS configuration. 
+
+| Ansible Variable    | Default value |
+|---------------------|---------------|
+| `bpwp_https_method` | `SERVER_PORT` |
+
+Available options:
+
+| Value                             | Description/Usage case                      |
+|-----------------------------------|---------------------------------------------|
+| `true` (boolean)                  | Force HTTPS always on                       |
+| `false` (boolean)                 | Force HTTPS always off                      |
+| `SERVER_PORT`                     | Check if `$_SERVER['SERVER_PORT']` is `443` |
+| `HTTP_X_FORWARDED_PROTO`          | Load balancer, reverse proxy, Nginx         |
+| `HTTP_X_FORWARDED_SSL`            | Reverse proxy                               |
+| `HTTP_CLOUDFRONT_FORWARDED_PROTO` | AWS CloudFront                              |
+| `HTTP_X_FORWARDED_SCHEME`         | KeyCDN                                      |
+| `HTTP_X_ARR_SSL`                  | Windows Azure ARR                           |
+
+### Paths customization
+All directories in this section are publicly exposed!
+
+| Ansible Variable              | Description                                                                                                    |                       |
+|-------------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------|
+| `bpwp_wp_uploads_dir_name`    | Directory name for storing [Must Use Plugins](https://wordpress.org/support/article/must-use-plugins/)         | Default: `uploads`    |
+| `bpwp_wp_plugins_dir_name`    | Directory name for storing [uploaded media files](https://wordpress.org/support/article/media-library-screen/) | Default: `plugins`    |
+| `bpwp_wp_themes_dir_name`     | Directory name for storing [Themes](https://wordpress.org/support/article/using-themes/)                       | Default: `themes`     |
+| `bpwp_wp_mu_plugins_dir_name` | Directory name for storing [Must Use Plugins](https://wordpress.org/support/article/must-use-plugins/)         | Default: `mu-plugins` |
+
 ### Cron
 It is highly recommended to use Crontab-based cron to drive Wordpress, over built-in one.  
 Check following links fore more information:
@@ -73,7 +106,6 @@ Check following links fore more information:
 | `bpwp_cron_day`         | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
 | `bpwp_cron_month`       | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
 | `bpwp_cron_weekday`     | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
-
 
 ## SMTP Configuration
 BPWP SMTP support is provided with third-party Wordpress plugin: https://wordpress.org/plugins/wp-mail-smtp/
@@ -146,8 +178,13 @@ Full documentation: https://wpmailsmtp.com/docs/how-to-set-up-the-other-smtp-mai
 | **SMTP Username**    | `bpwp_smtp_user`                 |                                                                                                | string, **required** |
 | **SMTP Password**    | `bpwp_smtp_pass`                 |                                                                                                | string, **required** |
 
+## Advanced options
+**Warning! Any changes made to files on remote server will be lost during Ansible-based deployment!**
 
-
+| Ansible Variable              | Description                                       |                 |
+|-------------------------------|---------------------------------------------------|-----------------|
+| `bpwp_wp_disallow_file_edit`  | Disable the Plugin and Theme Editor?              | Default: `true` |
+| `bpwp_wp_disallow_file_mods`  | Disable Plugin and Theme Update and Installation? | Default: `true` |
 
 ## License
 

@@ -52,3 +52,71 @@ define('WPMS_SMTP_AUTOTLS',         {% if bpwp_smtp_autotls %}true{% else %}fals
 define('WPMS_SMTP_AUTH',            {% if bpwp_smtp_auth %}true{% else %}false{% endif %});
 define('WPMS_SMTP_USER',            '{{ bpwp_smtp_user }}');
 define('WPMS_SMTP_PASS',            '{{ bpwp_smtp_pass }}');
+
+// danie1k/bulletproof-wordpress
+//======================================================================
+
+// Base paths
+//-----------------------------------------------------
+define('CWD',        __DIR__);
+define('VENDOR_DIR', CWD.DIRECTORY_SEPARATOR.'vendor');
+define('WWW_DIR',    CWD.DIRECTORY_SEPARATOR.'{{ bpwp_public_html_dir_name }}');
+
+// HTTPS detection
+//-----------------------------------------------------
+{% if bpwp_https_method is true %}
+$_SERVER['HTTPS'] = 'on';
+{% elif bpwp_https_method is false %}
+$_SERVER['HTTPS'] = '';
+{% elif bpwp_https_method == 'SERVER_PORT' %}
+$_SERVER['HTTPS'] = ($_SERVER['SERVER_PORT'] == '443') ? 'on' : '';
+{% elseif bpwp_https_method == 'HTTP_X_ARR_SSL' %}
+$_SERVER['HTTPS'] = !empty($_SERVER['HTTP_X_ARR_SSL']) ? 'on' : ''
+{% else %}
+$_SERVER['HTTPS'] = (isset($_SERVER['{{ bpwp_https_method }}']) && (strtolower($_SERVER['{{ bpwp_https_method }}']) === 'on' || $_SERVER['{{ bpwp_https_method }}'] === '1')) ? 'on' : '';
+{% endif %}
+define('WP_SERVER_SCHEME', $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://');
+
+// URLs
+//-----------------------------------------------------
+define('WP_SITEURL',       WP_SERVER_SCHEME.$_SERVER['SERVER_NAME']);
+define('WP_HOME',          WP_SERVER_SCHEME.$_SERVER['SERVER_NAME']);
+define('WP_CONTENT_URL',   WP_SERVER_SCHEME.$_SERVER['SERVER_NAME']);
+
+// Translations
+//-----------------------------------------------------
+define('WP_LANG_DIR',      CWD.DIRECTORY_SEPARATOR.'languages');
+define('LANGDIR',          CWD.DIRECTORY_SEPARATOR.'languages');
+
+// Uploads
+//-----------------------------------------------------
+# @See: mu-plugins/bpwp-fix-upload-path.php
+define('UPLOADS_DIR_NAME', '{{ bpwp_wp_uploads_dir_name }}');
+define('UPLOADS',          WWW_DIR.DIRECTORY_SEPARATOR.UPLOADS_DIR_NAME);  # Relative to ABSPATH
+
+// Plugins
+//-----------------------------------------------------
+define('MUPLUGINDIR',      WWW_DIR.DIRECTORY_SEPARATOR.'{{ bpwp_wp_mu_plugins_dir_name }}');
+define('WPMU_PLUGIN_DIR',  WWW_DIR.DIRECTORY_SEPARATOR.'{{ bpwp_wp_mu_plugins_dir_name }}');
+define('PLUGINDIR',        WWW_DIR.DIRECTORY_SEPARATOR.'{{ bpwp_wp_plugins_dir_name }}');
+define('WP_PLUGIN_DIR',    WWW_DIR.DIRECTORY_SEPARATOR.'{{ bpwp_wp_plugins_dir_name }}');
+
+// Themes
+//-----------------------------------------------------
+define('WP_THEME_DIR',     WWW_DIR.DIRECTORY_SEPARATOR.'{{ bpwp_wp_themes_dir_name }}');
+
+// wp-content
+//-----------------------------------------------------
+define('WP_CONTENT_DIR', rtrim(WWW_DIR,DIRECTORY_SEPARATOR));
+
+// Hardening
+//-----------------------------------------------------
+define('FORCE_SSL_LOGIN',    $_SERVER['HTTPS'] === 'on');
+define('FORCE_SSL_ADMIN',    $_SERVER['HTTPS'] === 'on');
+define('DISALLOW_FILE_EDIT', {% if bpwp_wp_disallow_file_edit %}true{% else %}false{% endif %});
+define('DISALLOW_FILE_MODS', {% if bpwp_wp_disallow_file_mods %}true{% else %}false{% endif %});
+
+// Composer
+//-----------------------------------------------------
+// TODO: Add support for Composer autoload.php
+// require_once 'autoload.php';

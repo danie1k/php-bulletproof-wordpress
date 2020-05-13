@@ -528,8 +528,6 @@ MigrationBackup/
 
 languages/*
 !languages/.gitkeep
-mu-plugins/*
-!mu-plugins/.gitkeep
 plugins/*
 !plugins/.gitkeep
 themes/*

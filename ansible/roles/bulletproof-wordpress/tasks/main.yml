@@ -88,6 +88,11 @@
     - src: "{{ src_vendor_user }}"
       dest: "{{ dest_vendor }}"
 
+- name: "BPWP | Ensure '{{ bpwp_wp_plugins_dir_name }}' directory exists"
+  file:
+    path: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{bpwp_wp_plugins_dir_name}}"
+    state: directory
+
 - name: "BPWP | Create wp-config.php file outside {{ bpwp_public_html_dir_name }} directory"
   template:
     src: wp-config.php.j2
