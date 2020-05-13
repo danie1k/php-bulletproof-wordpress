@@ -1,0 +1,54 @@
+<?php
+
+// WP Database
+//======================================================================
+define('DB_HOST',                   '{{ bpwp_db_host }}');
+define('DB_NAME',                   '{{ bpwp_db_name }}');
+define('DB_USER',                   '{{ bpwp_db_user }}');
+define('DB_PASSWORD',               '{{ bpwp_db_password }}');
+define('DB_CHARSET',                '{{ bpwp_db_charset }}');
+define('DB_COLLATE',                '{{ bpwp_db_collate }}');
+$table_prefix =                     '{{ bpwp_db_table_prefix }}';
+{% if MYSQL_CLIENT_FLAGS %}define('MYSQL_CLIENT_FLAGS', {{ MYSQL_CLIENT_FLAGS }}); {% endif %}
+
+// WP Secret keys
+//======================================================================
+define('AUTH_KEY',                  '{{ bpwp_auth_key }}');
+define('SECURE_AUTH_KEY',           '{{ bpwp_secure_auth_key }}');
+define('LOGGED_IN_KEY',             '{{ bpwp_logged_in_key }}');
+define('NONCE_KEY',                 '{{ bpwp_nonce_key }}');
+define('AUTH_SALT',                 '{{ bpwp_auth_salt }}');
+define('SECURE_AUTH_SALT',          '{{ bpwp_secure_auth_salt }}');
+define('LOGGED_IN_SALT',            '{{ bpwp_logged_in_salt }}');
+define('NONCE_SALT',                '{{ bpwp_nonce_salt }}');
+
+// WP Cron
+//======================================================================
+define('DISABLE_WP_CRON',           {% if bpwp_custom_cron %}true{% else %}false{% endif %});
+
+// WP Mail SMTP
+//======================================================================
+define('WPMS_ON',                   {% if bpwp_smtp_enabled %}true{% else %}false{% endif %});
+define('WPMS_MAIL_FROM',            '{{ bpwp_smtp_mail_from }}');
+define('WPMS_MAIL_FROM_FORCE',      {% if bpwp_smtp_mail_from_force %}true{% else %}false{% endif %});
+define('WPMS_MAIL_FROM_NAME',       '{{ bpwp_smtp_mail_from_name }}');
+define('WPMS_MAIL_FROM_NAME_FORCE', {% if bpwp_smtp_mail_from_force %}true{% else %}false{% endif %});
+define('WPMS_SET_RETURN_PATH',      {% if bpwp_smtp_set_return_path %}true{% else %}false{% endif %});
+define('WPMS_MAILER',               '{% if bpwp_smtp_mailer == 'php' %}mail{% else %}{{ bpwp_smtp_mailer }}');
+
+define('WPMS_SMTPCOM_API_KEY',      '{{ bpwp_smtp_smtpcom_api_key|default('') }}');
+define('WPMS_SMTPCOM_CHANNEL',      '{{ bpwp_smtp_smtpcom_channel|default('') }}');
+define('WPMS_PEPIPOST_API_KEY',     '{{ bpwp_smtp_pepipost_api_key|default('') }}');
+define('WPMS_SENDINBLUE_API_KEY',   '{{ bpwp_smtp_sendinblue_api_key|default('') }}');
+define('WPMS_MAILGUN_API_KEY',      '{{ bpwp_smtp_mailgun_api_key|default('') }}');
+define('WPMS_MAILGUN_DOMAIN',       '{{ bpwp_smtp_mailgun_domain|default('') }}');
+define('WPMS_MAILGUN_REGION',       '{{ bpwp_smtp_mailgun_region }}');
+define('WPMS_SENDGRID_API_KEY',     '{{ bpwp_smtp_sendgrid_api_key|default('') }}');
+
+define('WPMS_SMTP_HOST',            '{{ bpwp_smtp_host }}');
+define('WPMS_SMTP_PORT',            {{ bpwp_smtp_port }});
+define('WPMS_SSL',                  '{% if bpwp_smtp_ssl %}{{ bpwp_smtp_ssl }}{% endif %}');
+define('WPMS_SMTP_AUTOTLS',         {% if bpwp_smtp_autotls %}true{% else %}false{% endif %});
+define('WPMS_SMTP_AUTH',            {% if bpwp_smtp_auth %}true{% else %}false{% endif %});
+define('WPMS_SMTP_USER',            '{{ bpwp_smtp_user }}');
+define('WPMS_SMTP_PASS',            '{{ bpwp_smtp_pass }}');

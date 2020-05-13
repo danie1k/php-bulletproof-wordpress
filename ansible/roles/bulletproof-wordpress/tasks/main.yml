@@ -88,3 +88,25 @@
     - src: "{{ src_vendor_user }}"
       dest: "{{ dest_vendor }}"
 
+- name: "BPWP | Create wp-config.php file outside {{ bpwp_public_html_dir_name }} directory"
+  template:
+    src: wp-config.php.j2
+    dest: "{{ bpwp_remote_wordpress_home_dir }}/wp-config.php"
+    force: true
+
+- name: "BPWP | Configure Wordpress to look for wp-config.php in new place"
+  copy:
+    content: "<?php require_once ABSPATH.'..'.DIRECTORY_SEPARATOR.'wp-config.php'; require_once ABSPATH . 'wp-settings.php';"
+    dest: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/wp-config.php"
+    force: true
+
+- name: "BPWP | Configure Wordpress Cron"
+  cron:
+    name: "{{ bpwp_project_name|upper }}"
+    minute: "{{ wp_cron_minute }}"
+    hour: "{{ bpwp_cron_hour }}"
+    day: "{{ wp_cron_day }}"
+    month: "{{ bpwp_cron_month }}"
+    weekday: "{{ bpwp_cron_weekday }}"
+    job: "wget -q -O - {{ bpwp_project_url }}/wp-cron.php?doing_wp_cron >/dev/null 2>&1"
+    state: "{% if bpwp_custom_cron) %}present{% else %}absent{% endif %}"

@@ -1,0 +1,12 @@
+---
+
+bpwp_db_charset: utf8mb4
+bpwp_db_collate: utf8mb4_bin
+bpwp_db_table_prefix: wp_
+bpwp_db_client_flags: false
+
+bpwp_smtp_enabled: true
+bpwp_smtp_mail_from_force: false
+bpwp_smtp_mail_from_name_force: false
+bpwp_smtp_set_return_path: true
+bpwp_smtp_mailer: php
