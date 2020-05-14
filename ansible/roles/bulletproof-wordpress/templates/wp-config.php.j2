@@ -70,7 +70,7 @@ $_SERVER['HTTPS'] = 'on';
 $_SERVER['HTTPS'] = '';
 {% elif bpwp_https_method == 'SERVER_PORT' %}
 $_SERVER['HTTPS'] = ($_SERVER['SERVER_PORT'] == '443') ? 'on' : '';
-{% elseif bpwp_https_method == 'HTTP_X_ARR_SSL' %}
+{% elif bpwp_https_method == 'HTTP_X_ARR_SSL' %}
 $_SERVER['HTTPS'] = !empty($_SERVER['HTTP_X_ARR_SSL']) ? 'on' : ''
 {% else %}
 $_SERVER['HTTPS'] = (isset($_SERVER['{{ bpwp_https_method }}']) && (strtolower($_SERVER['{{ bpwp_https_method }}']) === 'on' || $_SERVER['{{ bpwp_https_method }}'] === '1')) ? 'on' : '';

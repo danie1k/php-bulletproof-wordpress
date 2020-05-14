@@ -1,6 +1,6 @@
 ---
 
-- name: "BPWP | Sending '{{ item.dest }}' to remote server..."
+- name: "BPWP | Rsyncing '{{ item.src }}' to remote server..."
   synchronize:
     archive: false
     compress: true
@@ -20,7 +20,7 @@
       - "-zz"
   when: not (bpwp_sync_method is defined) or bpwp_sync_method == 'rsync'
 
-- name: "BPWP | Sending '{{ item.dest }}' to remote server..."
+- name: "BPWP | Copying '{{ item.src }}' to remote server..."
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
