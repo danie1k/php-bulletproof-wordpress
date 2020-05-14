@@ -26,5 +26,3 @@ dest_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name
 dest_themes: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_themes_dir_name }}/"
 dest_wordpress: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_wordpress }}/"
 dest_vendor: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_vendor }}/"
-
-dest_wpadmin: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_remote_wordpress_admin_dir }}"

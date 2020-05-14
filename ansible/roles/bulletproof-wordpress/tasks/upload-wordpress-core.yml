@@ -1,0 +1,48 @@
+---
+
+- name: "BPWP | Collect Wordpress Core files to upload"
+  local_action:
+    excludes:
+      - wp-config*
+    file_type: file
+    module: find
+    paths: "{{ src_wordpress_bfwp }}"
+    patterns: "*.php"
+    recurse: no
+  register: bpwp_wp_core_files
+
+- name: "BPWP | Collect Wordpress Core directories to upload"
+  local_action:
+    excludes:
+      - wp-admin
+      - wp-content
+    file_type: directory
+    module: find
+    paths: "{{ src_wordpress_bfwp }}"
+    recurse: no
+  register: bpwp_wp_core_dirs
+
+- name: "BPWP | Prepare collected paths to be uploaded"
+  set_fact:
+    bpwp_wp_core_paths_to_upload: "{{ bpwp_wp_core_paths_to_upload|default([]) + [{ 'src': src_wordpress_bfwp+item, 'dest': dest_wordpress+item }] }}"
+  with_items:
+    - "{{ bpwp_wp_core_files.files | map(attribute='path') | map('basename') | list }}"
+    - "{{ bpwp_wp_core_dirs.files | map(attribute='path') | map('basename') | map('regex_replace', '^(.*)$', '\\1/') | list }}"
+
+- name: "BPWP | Prepare wp-admin to be uploaded"
+  set_fact:
+    bpwp_wp_core_paths_to_upload: "{{ bpwp_wp_core_paths_to_upload + [{ 'src': src_wordpress_bfwp+'wp-admin/', 'dest': dest_wordpress+bpwp_wp_admin_dir_name+'/' }] }}"
+
+- include_tasks: upload-files.yml
+  with_items: "{{ bpwp_wp_core_paths_to_upload }}"
+
+- block:
+    - name: "BPWP | Rename 'wp-admin' references in files to '{{ bpwp_wp_admin_dir_name }}'"
+      shell: "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/wp-admin/{{ bpwp_wp_admin_dir_name }}/g' {} \\;"
+      args:
+        chdir: "{{ dest_wordpress }}{{ bpwp_wp_admin_dir_name }}"
+    - name: "BPWP | Fix some '{{ bpwp_wp_admin_dir_name }}' files, because previous command is not perfect"
+      shell: "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/class-{{ bpwp_wp_admin_dir_name }}/class-wp-admin/g' {} \\;"
+      args:
+        chdir: "{{ dest_wordpress }}{{ bpwp_wp_admin_dir_name }}"
+  when: bpwp_wp_admin_dir_name != 'wp-admin'

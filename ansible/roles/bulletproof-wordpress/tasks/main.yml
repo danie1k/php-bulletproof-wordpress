@@ -11,32 +11,28 @@
       │
       │ Warning! All remote files will be overwritten if target path exist.
       │
-      ├─┬───────────────────────────╼ Languages: {{ dest_languages }}
+      ├─┬──────────────────────╼ Languages: {{ dest_languages }}
       │ ├> {{ src_languages_bfwp }}*
       │ └> {{ src_languages_user }}*
       │
-      ├─┬──────────────────────────╼ MU Plugins: {{ dest_mu_plugins }}
+      ├─┬──────────────────────╼ MU Plugins: {{ dest_mu_plugins }}
       │ ├> {{ src_mu_plugins_bfwp }}*
       │ └> {{ src_mu_plugins_user }}*
       │
-      ├─┬─────────────────────────────╼ Plugins: {{ dest_plugins }}
+      ├─┬──────────────────────╼ Plugins: {{ dest_plugins }}
       │ ├> {{ src_plugins_bfwp }}*
       │ └> {{ src_plugins_user }}*
       │
-      ├─┬──────────────────────────────╼ Themes: {{ dest_themes }}
+      ├─┬──────────────────────╼ Themes: {{ dest_themes }}
       │ ├> {{ src_themes_bfwp }}*
       │ └> {{ src_themes_user }}*
       │
-      ├─┬──────────────────────╼ Wordpress Core: {{ dest_wordpress }}
-      │ └> {{ src_wordpress_bfwp }}*
+      ├─┬──────────────────────╼ Wordpress Core
+      │ ├> {{ src_wordpress_bfwp }}wp-admin => {{ dest_wordpress }}{{ bpwp_wp_admin_dir_name }}
+      │ └> {{ src_wordpress_bfwp }}* => {{ dest_wordpress }}*
       │
-      ├─┬─────────────────────╼ Composer Vendor: {{ dest_wordpress }}
-      │ └> {{ src_wordpress_bfwp }}*
-      │
-      ├─┬─────────────────────╼ Composer Vendor: {{ dest_vendor }}
+      ├─┬──────────────────────╼ Composer Vendor: {{ dest_vendor }}
       │ └> {{ src_vendor_user }}*
-      │
-      ├──╼ Wordpress Admin dir: {{ dest_wpadmin }}
       │
       └─────────────────────────────────────────────────────────────────────────────
 
@@ -59,7 +55,7 @@
     - "{{ dest_wordpress }}"
     - "{{ dest_vendor }}"
 
-- include_tasks: upload-files
+- include_tasks: upload-files.yml
   with_items:
     # languages
     - src: "{{ src_languages_bfwp }}"
@@ -81,12 +77,11 @@
       dest: "{{ dest_themes }}"
     - src: "{{ src_themes_user }}"
       dest: "{{ dest_themes }}"
-    # wordpress
-    - src: "{{ src_wordpress_bfwp }}"
-      dest: "{{ dest_wordpress }}"
     # vendor
     - src: "{{ src_vendor_user }}"
       dest: "{{ dest_vendor }}"
+
+- include_tasks: upload-wordpress-core.yml
 
 - name: "BPWP | Ensure '{{ bpwp_wp_plugins_dir_name }}' directory exists"
   file:

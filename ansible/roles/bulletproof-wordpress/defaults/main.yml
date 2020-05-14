@@ -5,6 +5,7 @@ bpwp_db_collate: utf8mb4_bin
 bpwp_db_table_prefix: wp_
 bpwp_db_client_flags: false
 
+bpwp_wp_admin_dir_name: wp-admin
 bpwp_wp_uploads_dir_name: uploads
 bpwp_wp_plugins_dir_name: plugins
 bpwp_wp_themes_dir_name: themes

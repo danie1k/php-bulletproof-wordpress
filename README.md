@@ -112,11 +112,13 @@ Available options:
 | `HTTP_X_FORWARDED_SCHEME`         | KeyCDN                                      |
 | `HTTP_X_ARR_SSL`                  | Windows Azure ARR                           |
 
-### Paths customization
-All directories in this section are publicly exposed!
+### Paths settings
+All directories mentioned in this section are publicly exposed!
 
 | Ansible Variable              | Description                                                                                                    |                       |
 |-------------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------|
+| `bpwp_wp_admin_dir_name`      | **Name for wordpress admin panel directory**                                                                   | Default: `wp-admin`   |
+|                               |                                                                                                                |                       |
 | `bpwp_wp_uploads_dir_name`    | Directory name for storing [Must Use Plugins](https://wordpress.org/support/article/must-use-plugins/)         | Default: `uploads`    |
 | `bpwp_wp_plugins_dir_name`    | Directory name for storing [uploaded media files](https://wordpress.org/support/article/media-library-screen/) | Default: `plugins`    |
 | `bpwp_wp_themes_dir_name`     | Directory name for storing [Themes](https://wordpress.org/support/article/using-themes/)                       | Default: `themes`     |
