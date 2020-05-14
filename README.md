@@ -134,7 +134,7 @@ Check following links fore more information:
 
 | Ansible Variable        | Description                                                     | Type (default value) |
 |-------------------------|-----------------------------------------------------------------|----------------------|
-| `bpwp_custom_cron`      | Disables Wordpress built-in Cron and sets system crontab entry. | boolean (`true`)     |
+| `bpwp_custom_cron`      | Disables Wordpress built-in Cron and sets system crontab entry. | boolean (`false`)    |
 | `bpwp_cron_minute`      | *Used only if `bpwp_custom_cron` is enabled.* Every 10 minutes. | string (`*/10`)      |
 | `bpwp_cron_hour`        | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
 | `bpwp_cron_day`         | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
@@ -148,7 +148,7 @@ BPWP SMTP support is provided with third-party Wordpress plugin: https://wordpre
 
 | Setting name         | Ansible Variable                 | Description                                                                                    | Type (default value) |
 |----------------------|----------------------------------|------------------------------------------------------------------------------------------------|----------------------|
-|                      | `bpwp_smtp_enabled`              | Turns on/off SMTP support                                                                      | boolean (`true`)     |
+|                      | `bpwp_smtp_enabled`              | Turns on/off SMTP support                                                                      | boolean (`false`)    |
 | **From Email**       | `bpwp_smtp_mail_from`            | The email address which emails are sent from                                                   | string, **required** |
 | **From Name**        | `bpwp_smtp_mail_from_name`       | The name which emails are sent from                                                            | string, **required** |
 | **Force From Email** | `bpwp_smtp_mail_from_force`      | The From Email setting above will be used for all emails, ignoring values set by other plugins | boolean (`false`)    |

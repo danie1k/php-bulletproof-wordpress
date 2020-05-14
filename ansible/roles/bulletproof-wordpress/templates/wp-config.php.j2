@@ -9,7 +9,7 @@ define('DB_PASSWORD',               '{{ bpwp_db_password }}');
 define('DB_CHARSET',                '{{ bpwp_db_charset }}');
 define('DB_COLLATE',                '{{ bpwp_db_collate }}');
 $table_prefix =                     '{{ bpwp_db_table_prefix }}';
-{% if MYSQL_CLIENT_FLAGS %}define('MYSQL_CLIENT_FLAGS', {{ MYSQL_CLIENT_FLAGS }}); {% endif %}
+{% if bpwp_db_client_flags %}define('MYSQL_CLIENT_FLAGS', {{ bpwp_db_client_flags }}); {% endif %}
 
 // WP Secret keys
 //======================================================================
@@ -28,13 +28,14 @@ define('DISABLE_WP_CRON',           {% if bpwp_custom_cron %}true{% else %}false
 
 // WP Mail SMTP
 //======================================================================
+{% if bpwp_smtp_enabled %}
 define('WPMS_ON',                   {% if bpwp_smtp_enabled %}true{% else %}false{% endif %});
 define('WPMS_MAIL_FROM',            '{{ bpwp_smtp_mail_from }}');
 define('WPMS_MAIL_FROM_FORCE',      {% if bpwp_smtp_mail_from_force %}true{% else %}false{% endif %});
 define('WPMS_MAIL_FROM_NAME',       '{{ bpwp_smtp_mail_from_name }}');
 define('WPMS_MAIL_FROM_NAME_FORCE', {% if bpwp_smtp_mail_from_force %}true{% else %}false{% endif %});
 define('WPMS_SET_RETURN_PATH',      {% if bpwp_smtp_set_return_path %}true{% else %}false{% endif %});
-define('WPMS_MAILER',               '{% if bpwp_smtp_mailer == 'php' %}mail{% else %}{{ bpwp_smtp_mailer }}');
+define('WPMS_MAILER',               '{% if bpwp_smtp_mailer == 'php' %}mail{% else %}{{ bpwp_smtp_mailer }}{% endif %}');
 
 define('WPMS_SMTPCOM_API_KEY',      '{{ bpwp_smtp_smtpcom_api_key|default('') }}');
 define('WPMS_SMTPCOM_CHANNEL',      '{{ bpwp_smtp_smtpcom_channel|default('') }}');
@@ -52,6 +53,7 @@ define('WPMS_SMTP_AUTOTLS',         {% if bpwp_smtp_autotls %}true{% else %}fals
 define('WPMS_SMTP_AUTH',            {% if bpwp_smtp_auth %}true{% else %}false{% endif %});
 define('WPMS_SMTP_USER',            '{{ bpwp_smtp_user }}');
 define('WPMS_SMTP_PASS',            '{{ bpwp_smtp_pass }}');
+{% endif %}
 
 // danie1k/bulletproof-wordpress
 //======================================================================

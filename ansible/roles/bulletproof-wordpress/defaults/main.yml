@@ -5,6 +5,8 @@ bpwp_db_collate: utf8mb4_bin
 bpwp_db_table_prefix: wp_
 bpwp_db_client_flags: false
 
+bpwp_https_method: SERVER_PORT
+
 bpwp_wp_admin_dir_name: wp-admin
 bpwp_wp_uploads_dir_name: uploads
 bpwp_wp_plugins_dir_name: plugins
@@ -13,7 +15,9 @@ bpwp_wp_mu_plugins_dir_name: mu-plugins
 
 bpwp_wp_symlink_core: true
 
-bpwp_smtp_enabled: true
+bpwp_custom_cron: false
+
+bpwp_smtp_enabled: false
 bpwp_smtp_mail_from_force: false
 bpwp_smtp_mail_from_name_force: false
 bpwp_smtp_set_return_path: true
