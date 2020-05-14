@@ -123,6 +123,8 @@ All directories mentioned in this section are publicly exposed!
 | `bpwp_wp_plugins_dir_name`    | Directory name for storing [uploaded media files](https://wordpress.org/support/article/media-library-screen/) | Default: `plugins`    |
 | `bpwp_wp_themes_dir_name`     | Directory name for storing [Themes](https://wordpress.org/support/article/using-themes/)                       | Default: `themes`     |
 | `bpwp_wp_mu_plugins_dir_name` | Directory name for storing [Must Use Plugins](https://wordpress.org/support/article/must-use-plugins/)         | Default: `mu-plugins` |
+|                               |                                                                                                                |                       |
+| `bpwp_wp_symlink_core`        | Whether to deploy Wordpress core files into "public_html" directory (`false`), or **symlink** only (`true`)    | Default: `true`       |
 
 ### Cron
 It is highly recommended to use Crontab-based cron to drive Wordpress, over built-in one.  

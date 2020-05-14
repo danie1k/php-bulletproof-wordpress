@@ -11,6 +11,8 @@ bpwp_wp_plugins_dir_name: plugins
 bpwp_wp_themes_dir_name: themes
 bpwp_wp_mu_plugins_dir_name: mu-plugins
 
+bpwp_wp_symlink_core: true
+
 bpwp_smtp_enabled: true
 bpwp_smtp_mail_from_force: false
 bpwp_smtp_mail_from_name_force: false

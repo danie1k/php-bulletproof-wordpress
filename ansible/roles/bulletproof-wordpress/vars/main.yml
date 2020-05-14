@@ -26,3 +26,19 @@ dest_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name
 dest_themes: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_themes_dir_name }}/"
 dest_wordpress: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_wordpress }}/"
 dest_vendor: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_vendor }}/"
+
+bpwp_known_wp_core_files:
+  - wp-includes/
+  - index.php
+  - wp-activate.php
+  - wp-blog-header.php
+  - wp-comments-post.php
+  - wp-cron.php
+  - wp-links-opml.php
+  - wp-load.php
+  - wp-login.php
+  - wp-mail.php
+  - wp-settings.php
+  - wp-signup.php
+  - wp-trackback.php
+  - xmlrpc.php
