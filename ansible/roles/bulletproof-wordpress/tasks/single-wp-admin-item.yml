@@ -13,9 +13,9 @@
   when: bpwp_stat_wp_admin_item.stat.exists and bpwp_stat_wp_admin_item.stat.islnk and bpwp_wp_symlink_core is false
 
 - name: "BPWP | Remove existing '{{ item }}' and prepare space for symlink"
-  file:
-    path: "{{ item_abspath }}"
-    state: absent
+  shell: "rm -rf {{ item_abspath }}"
+  args:
+    warn: false
   when: bpwp_stat_wp_admin_item.stat.exists and (not bpwp_stat_wp_admin_item.stat.islnk) and bpwp_wp_symlink_core is true
 
 - name: "BPWP | Create '{{ item }}' symlink"
