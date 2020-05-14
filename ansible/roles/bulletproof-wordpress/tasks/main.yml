@@ -100,7 +100,7 @@
     dest: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/wp-config.php"
     force: true
 
-- name: "BPWP | Configure Wordpress Cron"
+- name: "BPWP | Configure crontab for Wordpress Cron"
   cron:
     name: "{{ bpwp_project_name|upper }}"
     minute: "{{ wp_cron_minute }}"
@@ -109,7 +109,14 @@
     month: "{{ bpwp_cron_month }}"
     weekday: "{{ bpwp_cron_weekday }}"
     job: "wget -q -O - {{ bpwp_project_url }}/wp-cron.php?doing_wp_cron >/dev/null 2>&1"
-    state: "{% if bpwp_custom_cron) %}present{% else %}absent{% endif %}"
+    state: present
+  when: bpwp_custom_cron
+
+- name: "BPWP | Disable crontab for Wordpress Cron"
+  cron:
+    name: "{{ bpwp_project_name|upper }}"
+    state: absent
+  when: not bpwp_custom_cron
 
 - name: "BPWP | Force disabling auto-updates mechanism"
   copy:
