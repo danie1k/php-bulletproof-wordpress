@@ -185,6 +185,7 @@ Full documentation: https://wpmailsmtp.com/docs/how-to-set-up-the-other-smtp-mai
 |-------------------------------|---------------------------------------------------|-----------------|
 | `bpwp_wp_disallow_file_edit`  | Disable the Plugin and Theme Editor?              | Default: `true` |
 | `bpwp_wp_disallow_file_mods`  | Disable Plugin and Theme Update and Installation? | Default: `true` |
+| `bpwp_wp_disable_autoupdates` | Disable Wordpress auto-updates using [Easy Updates Manager](https://wordpress.org/plugins/stops-core-theme-and-plugin-updates/) plugin | Default: `true` |
 
 ## License
 

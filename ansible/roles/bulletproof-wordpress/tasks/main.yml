@@ -115,3 +115,16 @@
     weekday: "{{ bpwp_cron_weekday }}"
     job: "wget -q -O - {{ bpwp_project_url }}/wp-cron.php?doing_wp_cron >/dev/null 2>&1"
     state: "{% if bpwp_custom_cron) %}present{% else %}absent{% endif %}"
+
+- name: "BPWP | Force disabling auto-updates mechanism"
+  copy:
+    src: bpwp-force-disable-autoupdates.php
+    dest: "{{ dest_mu_plugins }}bpwp-force-disable-autoupdates.php"
+    force: true
+  when: bpwp_wp_disable_autoupdates
+
+- name: "BPWP | Ensure auto-updates are not forced to be disabled"
+  file:
+    path: "{{ dest_mu_plugins }}bpwp-force-disable-autoupdates.php"
+    state: absent
+  when: not bpwp_wp_disable_autoupdates

@@ -16,10 +16,25 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.16"
   },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
   "prefer-stable": true,
   "minimum-stability": "dev",
   "config": {
     "sort-packages": true,
     "vendor-dir": "vendor"
+  },
+  "extra": {
+    "installer-paths": {
+      "plugins/{$name}/": ["type:wordpress-plugin"],
+      "themes/{$name}/": ["type:wordpress-theme"]
+    }
+  },
+  "require": {
+    "wpackagist-plugin/stops-core-theme-and-plugin-updates": "^9.0"
   }
 }

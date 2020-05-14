@@ -18,3 +18,4 @@ bpwp_smtp_mailer: php
 
 bpwp_wp_disallow_file_edit: true
 bpwp_wp_disallow_file_mods: true
+bpwp_wp_disable_autoupdates: true
