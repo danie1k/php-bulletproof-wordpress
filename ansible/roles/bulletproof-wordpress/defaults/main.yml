@@ -16,6 +16,11 @@ bpwp_wp_mu_plugins_dir_name: mu-plugins
 bpwp_wp_symlink_core: true
 
 bpwp_custom_cron: false
+bpwp_cron_minute: "*/10"
+bpwp_cron_hour: "*"
+bpwp_cron_day: "*"
+bpwp_cron_month: "*"
+bpwp_cron_weekday: "*"
 
 bpwp_smtp_enabled: false
 bpwp_smtp_mail_from_force: false
