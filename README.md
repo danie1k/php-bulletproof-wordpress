@@ -1,16 +1,27 @@
 # Bulletproof-Wordpress
-Bulletproof* Wordpress deployment automation based on Ansible & Composer
+
+[![Build Status](https://img.shields.io/travis/danie1k/php-bulletproof-wordpress)][1]
+[![Current Version](https://img.shields.io/packagist/v/danie1k/bulletproof-wordpress)][2]
+[![PHP Version Support](https://img.shields.io/packagist/php-v/danie1k/bulletproof-wordpress)][2]
+[![MIT License](https://img.shields.io/github/license/danie1k/php-bulletproof-wordpress)][3]
+
+Bulletproof\* Wordpress deployment automation based on Ansible & Composer
 
 # Table of Contents
-1. [Installation](#installation)
-2. [Basic Wordpress Configuration](#basic-wordpress-configuration)
+
+1. [Requirements](#requirements)
+    1. [Developer's Computer](#developers-computer)
+    2. [Web server (hosting)](#web-server-hosting)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Basic Wordpress Configuration](#basic-wordpress-configuration)
     1. [Database settings](#database-settings)
     2. [Secret keys](#secret-keys)
-3. [Extended Wordpress Configuration](#extended-wordpress-configuration)
+5. [Extended Wordpress Configuration](#extended-wordpress-configuration)
     1. [HTTPS detection mechanism](#https-detection-mechanism)
     2. [Paths customization](#paths-customization)
     3. [Cron](#cron)
-4. [SMTP Configuration](#smtp-configuration)
+6. [SMTP Configuration](#smtp-configuration)
     1. [Global settings](#global-settings)
     2. [Mailer-specific settings](#mailer-specific-settings)
         1. [PHP](#php)
@@ -20,16 +31,35 @@ Bulletproof* Wordpress deployment automation based on Ansible & Composer
         5. [Mailgun](#mailgun)
         6. [SendGrid](#sendgrid)
         7. [Classic SMTP server](#classic-smtp-server)
-5. [Advanced options](#advanced-options)
-6. [License](#license)
+7. [Advanced options](#advanced-options)
+8. [License](#license)
+
+## Requirements
+
+### Developer's Computer
+
+* Bash
+* [Ansible](https://www.ansible.com/)
+
+### Web server (hosting)
+
+* SSH access (for Ansible)
+* PHP >= 5 (for Wordpress)
+* Apache or Nginx web server
 
 ## Installation
+
 To begin run the following command in Bash-compatible terminal:
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/danie1k/php-bulletproof-wordpress/dev/.github/installer.sh)
 ```
 
 *Work in progress, more to come...*
+
+## Usage
+
+*To be added...*
+
 
 ## Basic Wordpress Configuration
 
@@ -194,3 +224,7 @@ MIT
 ----
 
 \* *Highly secured*
+
+[1]: http://travis-ci.org/danie1k/php-bulletproof-wordpress
+[2]: https://packagist.org/packages/danie1k/bulletproof-wordpress
+[3]: https://github.com/danie1k/php-bulletproof-wordpress/blob/dev/LICENSE

@@ -1,6 +1,9 @@
 
-# Created by https://www.gitignore.io/api/eclipse,netbeans,composer,intellij+all,visualstudio
-# Edit at https://www.gitignore.io/?templates=eclipse,netbeans,composer,intellij+all,visualstudio
+# Created by https://www.gitignore.io/api/ansible,eclipse,netbeans,composer,intellij+all,visualstudio
+# Edit at https://www.gitignore.io/?templates=ansible,eclipse,netbeans,composer,intellij+all,visualstudio
+
+### Ansible ###
+*.retry
 
 ### Composer ###
 composer.phar
@@ -524,7 +527,7 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-# End of https://www.gitignore.io/api/eclipse,netbeans,composer,intellij+all,visualstudio
+# End of https://www.gitignore.io/api/ansible,eclipse,netbeans,composer,intellij+all,visualstudio
 
 languages/*
 !languages/.gitkeep

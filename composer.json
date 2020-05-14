@@ -35,6 +35,7 @@
     }
   },
   "require": {
+    "php": ">=5.0",
     "wpackagist-plugin/stops-core-theme-and-plugin-updates": "^9.0"
   }
 }
