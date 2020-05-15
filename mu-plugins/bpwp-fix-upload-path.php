@@ -9,10 +9,12 @@ add_filter(
                     [
                         DIRECTORY_SEPARATOR.WWW_DIR,
                         ABSPATH.UPLOADS_DIR_NAME,
+                        WWW_DIR.DIRECTORY_SEPARATOR,
                     ],
                     [
                         DIRECTORY_SEPARATOR,
                         WWW_DIR.DIRECTORY_SEPARATOR.UPLOADS_DIR_NAME,
+                        WWW_DIR,
                     ],
                     $item,
                 );
