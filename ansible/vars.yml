@@ -1,4 +1,29 @@
 ---
 bpwp_project_name: bpwp-placeholder
+
+# This is your private file with all setting specific to your Wordpress installation.
+# By default you can find here a minimum required settings to successfully run Ansible.
+#
+# All Ansible variables listed in bulletproof-wordpress's README.md should be set here.
+#
+# !! NEVER commit this file to any repository (even private!) or publish online !!
+
+# Database settings
+bpwp_db_host:
+bpwp_db_name:
+bpwp_db_user:
+bpwp_db_password:
+
+# Secret keys (https://api.wordpress.org/secret-key/1.1/salt/)
+bpwp_auth_key:
+bpwp_secure_auth_key:
+bpwp_logged_in_key:
+bpwp_nonce_key:
+bpwp_auth_salt:
+bpwp_secure_auth_salt:
+bpwp_logged_in_salt:
+bpwp_nonce_salt:
+
+# Paths settings
 bpwp_remote_wordpress_home_dir:
 bpwp_public_html_dir_name: public_html
