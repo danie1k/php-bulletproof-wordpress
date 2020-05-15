@@ -1,5 +1,7 @@
 ---
 
+- include_vars: bpwp-dir.yml
+
 - pause:
     prompt: |-
                                 ╓─────────────────────────╖
@@ -11,28 +13,28 @@
       │
       │ Warning! All remote files will be overwritten if target path exist.
       │
-      ├─┬──────────────────────╼ Languages: {{ dest_languages }}
-      │ ├> {{ src_languages_bfwp }}*
-      │ └> {{ src_languages_user }}*
+      ├─┬──────────────────────╼ Languages: {{ bpwp_dest.languages }}
+      │ ├> {{ bpwp_src.languages_bpwp }}*
+      │ └> {{ bpwp_src.languages_user }}*
       │
-      ├─┬──────────────────────╼ MU Plugins: {{ dest_mu_plugins }}
-      │ ├> {{ src_mu_plugins_bfwp }}*
-      │ └> {{ src_mu_plugins_user }}*
+      ├─┬──────────────────────╼ MU Plugins: {{ bpwp_dest.mu_plugins }}
+      │ ├> {{ bpwp_src.mu_plugins_bpwp }}*
+      │ └> {{ bpwp_src.mu_plugins_user }}*
       │
-      ├─┬──────────────────────╼ Plugins: {{ dest_plugins }}
-      │ ├> {{ src_plugins_bfwp }}*
-      │ └> {{ src_plugins_user }}*
+      ├─┬──────────────────────╼ Plugins: {{ bpwp_dest.plugins }}
+      │ ├> {{ bpwp_src.plugins_bpwp }}*
+      │ └> {{ bpwp_src.plugins_user }}*
       │
-      ├─┬──────────────────────╼ Themes: {{ dest_themes }}
-      │ ├> {{ src_themes_bfwp }}*
-      │ └> {{ src_themes_user }}*
+      ├─┬──────────────────────╼ Themes: {{ bpwp_dest.themes }}
+      │ ├> {{ bpwp_src.themes_bpwp }}*
+      │ └> {{ bpwp_src.themes_user }}*
       │
       ├─┬──────────────────────╼ Wordpress Core
-      │ ├> {{ src_wordpress_bfwp }}wp-admin/ => {{ dest_wordpress }}{{ bpwp_wp_admin_dir_name }}/
-      │ └> {{ src_wordpress_bfwp }}* => {{ dest_wordpress }}*
+      │ ├> {{ bpwp_src.wordpress }}wp-admin/ => {{ bpwp_dest.wordpress }}{{ bpwp_wp_admin_dir_name }}/
+      │ └> {{ bpwp_src.wordpress }}* => {{ bpwp_dest.wordpress }}*
       │
-      ├─┬──────────────────────╼ Composer Vendor: {{ dest_vendor }}
-      │ └> {{ src_vendor_user }}*
+      ├─┬──────────────────────╼ Composer Vendor: {{ bpwp_dest.vendor }}
+      │ └> {{ bpwp_src.vendor }}*
       │
       └─────────────────────────────────────────────────────────────────────────────
 
@@ -48,38 +50,39 @@
     state: directory
   with_items:
     - "{{ bpwp_remote_wordpress_home_dir }}"
-    - "{{ dest_languages }}"
-    - "{{ dest_mu_plugins }}"
-    - "{{ dest_plugins }}"
-    - "{{ dest_themes }}"
-    - "{{ dest_wordpress }}"
-    - "{{ dest_vendor }}"
+    - "{{ bpwp_dest.languages }}"
+    - "{{ bpwp_dest.mu_plugins }}"
+    - "{{ bpwp_dest.plugins }}"
+    - "{{ bpwp_dest.themes }}"
+    - "{{ bpwp_dest.uploads }}"
+    - "{{ bpwp_dest.wordpress }}"
+    - "{{ bpwp_dest.vendor }}"
 
 - include_tasks: upload-files.yml
   with_items:
     # languages
-    - src: "{{ src_languages_bfwp }}"
-      dest: "{{ dest_languages }}"
-    - src: "{{ src_languages_user }}"
-      dest: "{{ dest_languages }}"
+    - src: "{{ bpwp_src.languages_bpwp }}"
+      dest: "{{ bpwp_dest.languages }}"
+    - src: "{{ bpwp_src.languages_user }}"
+      dest: "{{ bpwp_dest.languages }}"
     # mu-plugins
-    - src: "{{ src_mu_plugins_bfwp }}"
-      dest: "{{ dest_mu_plugins}}"
-    - src: "{{ src_mu_plugins_user }}"
-      dest: "{{ dest_mu_plugins}}"
+    - src: "{{ bpwp_src.mu_plugins_bpwp }}"
+      dest: "{{ bpwp_dest.mu_plugins}}"
+    - src: "{{ bpwp_src.mu_plugins_user }}"
+      dest: "{{ bpwp_dest.mu_plugins}}"
     # plugins
-    - src: "{{ src_plugins_bfwp }}"
-      dest: "{{ dest_plugins }}"
-    - src: "{{ src_plugins_user }}"
-      dest: "{{ dest_plugins }}"
+    - src: "{{ bpwp_src.plugins_bpwp }}"
+      dest: "{{ bpwp_dest.plugins }}"
+    - src: "{{ bpwp_src.plugins_ser }}"
+      dest: "{{ bpwp_dest.plugins }}"
     # themes
-    - src: "{{ src_themes_bfwp }}"
-      dest: "{{ dest_themes }}"
-    - src: "{{ src_themes_user }}"
-      dest: "{{ dest_themes }}"
+    - src: "{{ bpwp_src.themes_bfwp }}"
+      dest: "{{ bpwp_dest.themes }}"
+    - src: "{{ bpwp_src.themes_user }}"
+      dest: "{{ bpwp_dest.themes }}"
     # vendor
-    - src: "{{ src_vendor_user }}"
-      dest: "{{ dest_vendor }}"
+    - src: "{{ bpwp_src.vendor }}"
+      dest: "{{ bpwp_dest.vendor }}"
 
 - include_tasks: upload-wordpress-core.yml
 
@@ -121,12 +124,12 @@
 - name: "BPWP | Force disabling auto-updates mechanism"
   copy:
     src: bpwp-force-disable-autoupdates.php
-    dest: "{{ dest_mu_plugins }}bpwp-force-disable-autoupdates.php"
+    dest: "{{ bpwp_dest.mu_plugins }}bpwp-force-disable-autoupdates.php"
     force: true
   when: bpwp_wp_disable_autoupdates
 
 - name: "BPWP | Ensure auto-updates are not forced to be disabled"
   file:
-    path: "{{ dest_mu_plugins }}bpwp-force-disable-autoupdates.php"
+    path: "{{ bpwp_dest.mu_plugins }}bpwp-force-disable-autoupdates.php"
     state: absent
   when: not bpwp_wp_disable_autoupdates

@@ -1,0 +1,7 @@
+bpwp_dir_languages: languages
+bpwp_dir_mu_plugins: mu-plugins
+bpwp_dir_plugins: plugins
+bpwp_dir_themes: themes
+bpwp_dir_vendor: vendor
+bpwp_dir_wordpress: wordpress
+bpwp_my_name: bulletproof-wordpress

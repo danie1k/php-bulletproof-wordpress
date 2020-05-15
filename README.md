@@ -119,8 +119,8 @@ All directories mentioned in this section are publicly exposed!
 |-------------------------------|----------------------------------------------------------------------------------------------------------------|-----------------------|
 | `bpwp_wp_admin_dir_name`      | **Name for wordpress admin panel directory**                                                                   | Default: `wp-admin`   |
 |                               |                                                                                                                |                       |
-| `bpwp_wp_uploads_dir_name`    | Directory name for storing [Must Use Plugins](https://wordpress.org/support/article/must-use-plugins/)         | Default: `uploads`    |
-| `bpwp_wp_plugins_dir_name`    | Directory name for storing [uploaded media files](https://wordpress.org/support/article/media-library-screen/) | Default: `plugins`    |
+| `bpwp_wp_uploads_dir_name`    | Directory name for storing [uploaded media files](https://wordpress.org/support/article/media-library-screen/) | Default: `uploads`    |
+| `bpwp_wp_plugins_dir_name`    | Directory name for storing [Plugins](https://wordpress.org/support/article/plugins/)                           | Default: `plugins`    |
 | `bpwp_wp_themes_dir_name`     | Directory name for storing [Themes](https://wordpress.org/support/article/using-themes/)                       | Default: `themes`     |
 | `bpwp_wp_mu_plugins_dir_name` | Directory name for storing [Must Use Plugins](https://wordpress.org/support/article/must-use-plugins/)         | Default: `mu-plugins` |
 |                               |                                                                                                                |                       |
@@ -132,14 +132,16 @@ Check following links fore more information:
 * https://support.hostgator.com/articles/specialized-help/technical/wordpress/how-to-replace-wordpress-cron-with-a-real-cron-job
 * https://easyengine.io/tutorials/wordpress/wp-cron-crontab/
 
-| Ansible Variable        | Description                                                     | Type (default value) |
-|-------------------------|-----------------------------------------------------------------|----------------------|
-| `bpwp_custom_cron`      | Disables Wordpress built-in Cron and sets system crontab entry. | boolean (`false`)    |
-| `bpwp_cron_minute`      | *Used only if `bpwp_custom_cron` is enabled.* Every 10 minutes. | string (`*/10`)      |
-| `bpwp_cron_hour`        | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
-| `bpwp_cron_day`         | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
-| `bpwp_cron_month`       | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
-| `bpwp_cron_weekday`     | *Used only if `bpwp_custom_cron` is enabled.*                   | string (`*`)         |
+| Ansible Variable          | Description                                                                | Type (default value)                      |
+|---------------------------|----------------------------------------------------------------------------|-------------------------------------------|
+| `bpwp_custom_cron`        | Disables Wordpress built-in Cron and sets system crontab entry.            | boolean (`false`)                         |
+| `bpwp_project_public_url` | Public URL of your Wordpress site, crontab will look there for wp-cron.php | required only if `bpwp_custom_cron: true` |
+|                           |                                                                            |                                           |
+| `bpwp_cron_minute`        | *Used only if `bpwp_custom_cron` is enabled.* Every 10 minutes.            | string (`*/10`)                           |
+| `bpwp_cron_hour`          | *Used only if `bpwp_custom_cron` is enabled.*                              | string (`*`)                              |
+| `bpwp_cron_day`           | *Used only if `bpwp_custom_cron` is enabled.*                              | string (`*`)                              |
+| `bpwp_cron_month`         | *Used only if `bpwp_custom_cron` is enabled.*                              | string (`*`)                              |
+| `bpwp_cron_weekday`       | *Used only if `bpwp_custom_cron` is enabled.*                              | string (`*`)                              |
 
 ## SMTP Configuration
 BPWP SMTP support is provided with third-party Wordpress plugin: https://wordpress.org/plugins/wp-mail-smtp/
@@ -215,11 +217,12 @@ Full documentation: https://wpmailsmtp.com/docs/how-to-set-up-the-other-smtp-mai
 ## Advanced options
 **Warning! Any changes made to files on remote server will be lost during Ansible-based deployment!**
 
-| Ansible Variable              | Description                                       |                 |
-|-------------------------------|---------------------------------------------------|-----------------|
-| `bpwp_wp_disallow_file_edit`  | Disable the Plugin and Theme Editor?              | Default: `true` |
-| `bpwp_wp_disallow_file_mods`  | Disable Plugin and Theme Update and Installation? | Default: `true` |
+| Ansible Variable              | Description                                       |                  |
+|-------------------------------|---------------------------------------------------|------------------|
+| `bpwp_wp_disallow_file_edit`  | Disable the Plugin and Theme Editor?              | Default: `true`  |
+| `bpwp_wp_disallow_file_mods`  | Disable Plugin and Theme Update and Installation? | Default: `true`  |
 | `bpwp_wp_disable_autoupdates` | Disable Wordpress auto-updates using [Easy Updates Manager](https://wordpress.org/plugins/stops-core-theme-and-plugin-updates/) plugin | Default: `true` |
+| `bpwp_wp_custom_user_config`  | Custom PHP code to be added to `wp-config.php`    | Empty by default |
 
 ## License
 

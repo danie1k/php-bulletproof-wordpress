@@ -2,12 +2,12 @@
 
 - name: "BPWP | Prepare wp-admin file list to upload"
   set_fact:
-    bpwp_wp_core_paths_to_upload: "{{ bpwp_wp_core_paths_to_upload|default([]) + [{ 'src': src_wordpress_bfwp+item, 'dest': dest_wordpress+item }] }}"
+    bpwp_wp_core_paths_to_upload: "{{ bpwp_wp_core_paths_to_upload|default([]) + [{ 'src': bpwp_src.wordpress+item, 'dest': bpwp_dest.wordpress+item }] }}"
   with_items: "{{ bpwp_known_wp_core_files }}"
 
 - name: "BPWP | Prepare wp-admin files to be uploaded"
   set_fact:
-    bpwp_wp_core_paths_to_upload: "{{ bpwp_wp_core_paths_to_upload + [{ 'src': src_wordpress_bfwp+'wp-admin/', 'dest': dest_wordpress+bpwp_wp_admin_dir_name+'/' }] }}"
+    bpwp_wp_core_paths_to_upload: "{{ bpwp_wp_core_paths_to_upload + [{ 'src': bpwp_src.wordpress+'wp-admin/', 'dest': bpwp_dest.wordpress+bpwp_wp_admin_dir_name+'/' }] }}"
 
 - include_tasks: upload-files.yml
   with_items: "{{ bpwp_wp_core_paths_to_upload }}"
@@ -16,11 +16,11 @@
     - name: "BPWP | Rename 'wp-admin' references in files to '{{ bpwp_wp_admin_dir_name }}'"
       shell: "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/wp-admin/{{ bpwp_wp_admin_dir_name }}/g' {} \\;"
       args:
-        chdir: "{{ dest_wordpress }}{{ bpwp_wp_admin_dir_name }}"
+        chdir: "{{ bpwp_dest.wordpress }}{{ bpwp_wp_admin_dir_name }}"
     - name: "BPWP | Fix some '{{ bpwp_wp_admin_dir_name }}' files, because previous command is not perfect"
       shell: "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/class-{{ bpwp_wp_admin_dir_name }}/class-wp-admin/g' {} \\;"
       args:
-        chdir: "{{ dest_wordpress }}{{ bpwp_wp_admin_dir_name }}"
+        chdir: "{{ bpwp_dest.wordpress }}{{ bpwp_wp_admin_dir_name }}"
   when: bpwp_wp_admin_dir_name != 'wp-admin'
 
 - include_tasks: single-wp-admin-item.yml

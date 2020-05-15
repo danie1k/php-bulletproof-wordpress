@@ -1,11 +1,7 @@
 ---
 
 - hosts: bpwp-placeholder
+  vars_files:
+    - vars.yml
   roles:
     - name: bulletproof-wordpress
-      vars:
-        bpwp_project_name: bpwp-placeholder
-        bpwp_project_url: bpwp-url-placeholder
-        bpwp_sync_method:
-        bpwp_remote_wordpress_home_dir:
-        bpwp_public_html_dir_name:

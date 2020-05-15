@@ -118,7 +118,6 @@ define('FORCE_SSL_ADMIN',    $_SERVER['HTTPS'] === 'on');
 define('DISALLOW_FILE_EDIT', {% if bpwp_wp_disallow_file_edit %}true{% else %}false{% endif %});
 define('DISALLOW_FILE_MODS', {% if bpwp_wp_disallow_file_mods %}true{% else %}false{% endif %});
 
-// Composer
+// Custom user PHP code
 //-----------------------------------------------------
-// TODO: Add support for Composer autoload.php
-// require_once 'autoload.php';
+{{ bpwp_wp_custom_user_config }}

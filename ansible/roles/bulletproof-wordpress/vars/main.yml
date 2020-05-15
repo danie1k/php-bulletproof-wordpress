@@ -1,31 +1,33 @@
 ---
-bpwp_dir_languages: languages
-bpwp_dir_mu_plugins: mu-plugins
-bpwp_dir_plugins: plugins
-bpwp_dir_themes: themes
-bpwp_dir_vendor: vendor
-bpwp_dir_wordpress: wordpress
-bpwp_my_name: bulletproof-wordpress
 
 bpwp_home_dir: "{{ playbook_dir }}/{{ bpwp_my_name }}"
 
-src_languages_bfwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_languages }}/"
-src_languages_user: "{{ playbook_dir }}/{{ bpwp_dir_languages }}/"
-src_mu_plugins_bfwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_mu_plugins }}/"
-src_mu_plugins_user: "{{ playbook_dir }}/{{ bpwp_dir_mu_plugins }}/"
-src_plugins_bfwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_plugins }}/"
-src_plugins_user: "{{ playbook_dir }}/{{ bpwp_dir_plugins }}/"
-src_themes_bfwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_themes }}/"
-src_themes_user: "{{ playbook_dir }}/{{ bpwp_dir_themes }}/"
-src_wordpress_bfwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_wordpress }}/"
-src_vendor_user: "{{ playbook_dir }}/{{ bpwp_dir_vendor }}/"
+bpwp_src:
+  # languages
+  languages_bpwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_languages }}/"
+  languages_user: "{{ playbook_dir }}/{{ bpwp_dir_languages }}/"
+  # mu-plugins
+  mu_plugins_bpwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_mu_plugins }}/"
+  mu_plugins_user: "{{ playbook_dir }}/{{ bpwp_dir_mu_plugins }}/"
+  # plugins
+  plugins_bpwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_plugins }}/"
+  plugins_user: "{{ playbook_dir }}/{{ bpwp_dir_plugins }}/"
+  # themes
+  themes_bpwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_themes }}/"
+  themes_user: "{{ playbook_dir }}/{{ bpwp_dir_themes }}/"
+  # wordpress core
+  wordpress: "{{ bpwp_home_dir }}/{{ bpwp_dir_wordpress }}/"
+  # composer vendor
+  vendor: "{{ playbook_dir }}/{{ bpwp_dir_vendor }}/"
 
-dest_languages: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_languages }}/"
-dest_mu_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_mu_plugins_dir_name }}/"
-dest_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_plugins_dir_name }}/"
-dest_themes: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_themes_dir_name }}/"
-dest_wordpress: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_wordpress }}/"
-dest_vendor: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_vendor }}/"
+bpwp_dest:
+  languages: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_languages }}/"
+  mu_plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_mu_plugins_dir_name }}/"
+  plugins: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_plugins_dir_name }}/"
+  themes: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_themes_dir_name }}/"
+  uploads: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_uploads_dir_name }}/"
+  wordpress: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_wordpress }}/"
+  vendor: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_vendor }}/"
 
 bpwp_known_wp_core_files:
   - wp-includes/
