@@ -44,3 +44,7 @@ bpwp_known_wp_core_files:
   - wp-signup.php
   - wp-trackback.php
   - xmlrpc.php
+
+bpwp_chmod:
+  dirs: "find . -type d -exec chmod 755 {} \;"
+  files: "find . -type f -exec chmod 644 {} \;"

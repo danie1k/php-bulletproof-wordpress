@@ -133,3 +133,12 @@
     path: "{{ bpwp_dest.mu_plugins }}bpwp-force-disable-autoupdates.php"
     state: absent
   when: not bpwp_wp_disable_autoupdates
+
+- include_tasks: chmod.yml
+  with_items:
+    - "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}"
+    - "{{ bpwp_dest.languages }}"
+    - "{{ bpwp_dest.wordpress }}"
+    - "{{ bpwp_dest.vendor }}"
+  loop_control:
+    loop_var: chmod_chdir

@@ -1,0 +1,9 @@
+
+- name: "BPWP | Chmod directories & files in {{ chmod_chdir }}"
+  shell: "{{ item }}"
+  args:
+    chdir: "{{ chmod_chdir }}"
+  with_items:
+    - "{{ bpwp_chmod.dirs }}"
+    - "{{ bpwp_chmod.files }}"
+
