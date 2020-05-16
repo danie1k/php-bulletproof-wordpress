@@ -1,0 +1,25 @@
+---
+
+- block:
+    - name: "BPWP | Download & install latest version of 'WP Mail SMTP' Wordpress plugin"
+      unarchive:
+        src: https://downloads.wordpress.org/plugin/wp-mail-smtp.latest-stable.zip
+        dest: "{{ bpwp_dest.plugins }}"
+        remote_src: true
+    - name: "BPWP | Force 'WP Mail SMTP' plugin to be active & configured"
+      copy:
+        src: bpwp-force-wp-mail-smtp.php
+        dest: "{{ bpwp_dest.mu_plugins }}bpwp-force-wp-mail-smtp.php"
+        force: true
+  when: bpwp_smtp_enabled
+
+- block:
+    - name: "BPWP | Remove 'WP Mail SMTP' mu-plugin"
+      file:
+        path: "{{ bpwp_dest.mu_plugins }}bpwp-force-wp-mail-smtp.php"
+        state: absent
+    - name: "BPWP | Remove 'WP Mail SMTP' plugin"
+      file:
+        path: "{{ bpwp_dest.plugins }}wp-mail-smtp"
+        state: absent
+  when: not bpwp_smtp_enabled

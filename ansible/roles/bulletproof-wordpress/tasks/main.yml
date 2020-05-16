@@ -126,6 +126,8 @@
 
 - include_tasks: autoupdates.yml
 
+- include_tasks: smtp.yml
+
 - include_tasks: chmod.yml
   with_items:
     - "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}"
