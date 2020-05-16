@@ -1,5 +1,11 @@
 <?php
 
+// Base paths
+//-----------------------------------------------------
+define('CWD',        __DIR__);
+define('VENDOR_DIR', CWD.DIRECTORY_SEPARATOR.'{{ bpwp_dir_vendor }}');
+define('WWW_DIR',    CWD.DIRECTORY_SEPARATOR.'{{ bpwp_public_html_dir_name }}');
+
 // WP Database
 //======================================================================
 define('DB_HOST',                   '{{ bpwp_db_host }}');
@@ -25,6 +31,21 @@ define('NONCE_SALT',                '{{ bpwp_nonce_salt }}');
 // WP Cron
 //======================================================================
 define('DISABLE_WP_CRON',           {% if bpwp_custom_cron %}true{% else %}false{% endif %});
+
+// Cache
+//======================================================================
+define('CACHE_DIR',                 WWW_DIR.DIRECTORY_SEPARATOR.'{{ bpwp_dir_cache }}');
+define('MAGPIE_CACHE_DIR',          CACHE_DIR);
+{% if bpwp_smtp_enabled %}define('WP_CACHE',                  true);{% endif %}
+
+// W3 Total Cache
+//-----------------------------------------------------
+{% if bpwp_smtp_enabled %}
+define('W3TC_CACHE_DIR',            CACHE_DIR);
+define('W3TC_CONFIG_DIR',           CWD.DIRECTORY_SEPARATOR.'w3tc-config');
+{% else %}
+// Disabled
+{% endif %}
 
 // WP Mail SMTP
 //======================================================================
@@ -59,16 +80,13 @@ define('WPMS_SMTP_AUTH',            {% if bpwp_smtp_auth %}true{% else %}false{%
 define('WPMS_SMTP_USER',            '{{ bpwp_smtp_user }}');
 define('WPMS_SMTP_PASS',            '{{ bpwp_smtp_pass }}');
 {% endif %}
+{% else %}
+// Disabled
 {% endif %}
+
 
 // danie1k/bulletproof-wordpress
 //======================================================================
-
-// Base paths
-//-----------------------------------------------------
-define('CWD',        __DIR__);
-define('VENDOR_DIR', CWD.DIRECTORY_SEPARATOR.'vendor');
-define('WWW_DIR',    CWD.DIRECTORY_SEPARATOR.'{{ bpwp_public_html_dir_name }}');
 
 // HTTPS detection
 //-----------------------------------------------------

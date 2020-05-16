@@ -2,6 +2,7 @@
 
 bpwp_project_home_dir: "{{ (playbook_dir ~ '/../')|realpath }}"
 bpwp_project_dir_name: "{{ bpwp_project_home_dir|basename }}"
+bpwp_wp_content_dir: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}"
 
 bpwp_src:
   # languages

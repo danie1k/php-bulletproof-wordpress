@@ -145,6 +145,12 @@ Check following links fore more information:
 | `bpwp_cron_month`         | *Used only if `bpwp_custom_cron` is enabled.*                              | string (`*`)                              |
 | `bpwp_cron_weekday`       | *Used only if `bpwp_custom_cron` is enabled.*                              | string (`*`)                              |
 
+### W3 Total Cache
+
+| Ansible Variable    | Default value |
+|---------------------|---------------|
+| `bpwp_w3tc_enabled` | `false`       |
+
 ## SMTP Configuration
 BPWP SMTP support is provided with third-party Wordpress plugin: https://wordpress.org/plugins/wp-mail-smtp/
 

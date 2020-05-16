@@ -115,9 +115,9 @@
     state: absent
   when: not bpwp_custom_cron
 
-- include_tasks: autoupdates.yml
-
+- include_tasks: w3tc.yml
 - include_tasks: smtp.yml
+- include_tasks: autoupdates.yml
 
 - include_tasks: rename-wp-admin.yml
 

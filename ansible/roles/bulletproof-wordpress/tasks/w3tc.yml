@@ -1,0 +1,35 @@
+---
+- set_fact:
+    bpwp_kwnown_w3tc_files:
+      - db.php
+      - advanced-cache.php
+      - object-cache.php
+
+- block:
+    - name: "BPWP | Download & install latest version of 'W3 Total Cache' Wordpress plugin"
+      unarchive:
+        src: https://downloads.wordpress.org/plugin/w3-total-cache.latest-stable.zip
+        dest: "{{ bpwp_dest.plugins }}"
+        remote_src: true
+    - name: "BPWP | Force 'W3 Total Cache' plugin to be active & configured"
+      copy:
+        src: bpwp-force-w3-total-cache.php
+        dest: "{{ bpwp_dest.mu_plugins }}bpwp-force-w3-total-cache.php"
+        force: true
+  when: bpwp_w3tc_enabled
+
+- block:
+    - name: "BPWP | Remove 'W3 Total Cache' mu-plugin"
+      file:
+        path: "{{ bpwp_dest.mu_plugins }}bpwp-force-w3-total-cache.php"
+        state: absent
+    - name: "BPWP | Remove 'W3 Total Cache' plugin"
+      file:
+        path: "{{ bpwp_dest.plugins }}w3-total-cache"
+        state: absent
+    - name: "BPWP | Remove 'W3 Total Cache' third-party files"
+      file:
+        path: "{{ bpwp_wp_content_dir }}/{{ item }}"
+        state: absent
+      with_items: "{{ bpwp_kwnown_w3tc_files }}"
+  when: not bpwp_w3tc_enabled

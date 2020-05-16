@@ -29,6 +29,8 @@ bpwp_cron_day: "*"
 bpwp_cron_month: "*"
 bpwp_cron_weekday: "*"
 
+## W3 Total Cache
+bpwp_w3tc_enabled: false
 
 # SMTP Configuration
 
