@@ -34,7 +34,8 @@ Bulletproof\* Wordpress deployment automation based on Ansible & Composer
 7. [Advanced options](#advanced-options)
     1. [Various settings](#various-settings)
     2. [Files upload mechanism](#files-upload-mechanism)
-8. [License](#license)
+8. [Roadmap](#roadmap)
+9. [License](#license)
 
 ## Requirements
 
@@ -247,6 +248,15 @@ There are two mechanism available for uploading your Wordpress files to remote s
 | `rsync` | Uses [rsync](http://rsync.samba.org/) via [Ansible `synchronize` module](https://docs.ansible.com/ansible/latest/modules/synchronize_module.html) |
 | `copy`  | Uses [Ansible `copy` module](https://docs.ansible.com/ansible/latest/modules/copy_module.html)                                                    |
 
+
+## Roadmap
+* Add `.htaccess` files for Apache web server
+* Nginx config generator
+* More detailed "DEPLOYMENT CONFIRMATION" report
+* Add support for Composer's `autoload.php`
+* Add shell script to update BPWP (similar to `installer.sh`)
+* Improve installation & usage instructions in README
+* Javascript converter "api.wordpress.org/secret-key/1.1/salt/" -> Ansible Variables
 
 ## License
 
