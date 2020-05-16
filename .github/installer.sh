@@ -169,7 +169,7 @@ function _configure_ansible() {
 _welcome
 
 _q "Name of your project?" && read project_name
-[[ "${project_name}" =~ ^[a-z0-9_-]+$ ]] || _die "Project name is invalid!"
+[[ "${project_name}" =~ ^[a-z0-9_.-]+$ ]] || _die "Project name is invalid!"
 
 _q "Project files location? [DEFAULT: ${cwd}]" && read project_home
 [[ -z "${project_home}" ]] && project_home="${cwd}" || project_home="${project_home%/}"
