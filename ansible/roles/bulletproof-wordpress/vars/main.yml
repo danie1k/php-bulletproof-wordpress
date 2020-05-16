@@ -1,24 +1,25 @@
 ---
 
-bpwp_home_dir: "{{ playbook_dir }}/{{ bpwp_my_name }}"
+bpwp_project_home_dir: "{{ (playbook_dir ~ '/../')|realpath }}"
+bpwp_project_dir_name: "{{ bpwp_project_home_dir|basename }}"
 
 bpwp_src:
   # languages
-  languages_bpwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_languages }}/"
-  languages_user: "{{ playbook_dir }}/{{ bpwp_dir_languages }}/"
+  languages_bpwp: "{{ bpwp_project_home_dir }}/{{ bpwp_my_name }}/{{ bpwp_dir_languages }}/"
+  languages_user: "{{ bpwp_project_home_dir }}/{{ bpwp_dir_languages }}/"
   # mu-plugins
-  mu_plugins_bpwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_mu_plugins }}/"
-  mu_plugins_user: "{{ playbook_dir }}/{{ bpwp_dir_mu_plugins }}/"
+  mu_plugins_bpwp: "{{ bpwp_project_home_dir }}/{{ bpwp_my_name }}/{{ bpwp_dir_mu_plugins }}/"
+  mu_plugins_user: "{{ bpwp_project_home_dir }}/{{ bpwp_dir_mu_plugins }}/"
   # plugins
-  plugins_bpwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_plugins }}/"
-  plugins_user: "{{ playbook_dir }}/{{ bpwp_dir_plugins }}/"
+  plugins_bpwp: "{{ bpwp_project_home_dir }}/{{ bpwp_my_name }}/{{ bpwp_dir_plugins }}/"
+  plugins_user: "{{ bpwp_project_home_dir }}/{{ bpwp_dir_plugins }}/"
   # themes
-  themes_bpwp: "{{ bpwp_home_dir }}/{{ bpwp_dir_themes }}/"
-  themes_user: "{{ playbook_dir }}/{{ bpwp_dir_themes }}/"
+  themes_bpwp: "{{ bpwp_project_home_dir }}/{{ bpwp_my_name }}/{{ bpwp_dir_themes }}/"
+  themes_user: "{{ bpwp_project_home_dir }}/{{ bpwp_dir_themes }}/"
   # wordpress core
-  wordpress: "{{ bpwp_home_dir }}/{{ bpwp_dir_wordpress }}/"
+  wordpress: "{{ bpwp_project_home_dir }}/{{ bpwp_my_name }}/{{ bpwp_dir_wordpress }}/"
   # composer vendor
-  vendor: "{{ playbook_dir }}/{{ bpwp_dir_vendor }}/"
+  vendor: "{{ bpwp_project_home_dir }}/{{ bpwp_dir_vendor }}/"
 
 bpwp_dest:
   languages: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_dir_languages }}/"

@@ -44,3 +44,4 @@ bpwp_wp_disallow_file_edit: true
 bpwp_wp_disallow_file_mods: true
 bpwp_wp_disable_autoupdates: true
 bpwp_wp_custom_user_config: ""
+bpwp_sync_method: rsync

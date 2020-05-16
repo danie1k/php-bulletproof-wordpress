@@ -32,6 +32,8 @@ Bulletproof\* Wordpress deployment automation based on Ansible & Composer
         6. [SendGrid](#sendgrid)
         7. [Classic SMTP server](#classic-smtp-server)
 7. [Advanced options](#advanced-options)
+    1. [Various settings](#various-settings)
+    2. [Files upload mechanism](#files-upload-mechanism)
 8. [License](#license)
 
 ## Requirements
@@ -156,7 +158,7 @@ BPWP SMTP support is provided with third-party Wordpress plugin: https://wordpre
 | **Force From Email** | `bpwp_smtp_mail_from_force`      | The From Email setting above will be used for all emails, ignoring values set by other plugins | boolean (`false`)    |
 | **Force From Name**  | `bpwp_smtp_mail_from_name_force` | The From Name setting above will be used for all emails, ignoring values set by other plugins  | boolean (`false`)    |
 | **Return Path**      | `bpwp_smtp_set_return_path`      | Return Path indicates where non-delivery receipts - or bounce messages - are to be sent.<br />If disabled, bounce messages may be lost. Some providers may ignore this option. | boolean (`true`) |
-| **Mailer**           | `bpwp_smtp_mailer`               | Mailer engine. Possible values: `php`, `smtp.com`, `sendinblue`, `mailgun`, `sendgrid`, `smtp` | string (`php`) |
+| **Mailer**           | `bpwp_smtp_mailer`               | Mailer engine. Possible values: `php`, `smtp.com`, `pepipost`, `sendinblue`, `mailgun`, `sendgrid`, `smtp` | string (`php`) |
 
 ### Mailer-specific settings
 
@@ -215,6 +217,8 @@ Full documentation: https://wpmailsmtp.com/docs/how-to-set-up-the-other-smtp-mai
 | **SMTP Password**    | `bpwp_smtp_pass`                 |                                                                                                | string, **required** |
 
 ## Advanced options
+
+### Various settings
 **Warning! Any changes made to files on remote server will be lost during Ansible-based deployment!**
 
 | Ansible Variable              | Description                                       |                  |
@@ -223,6 +227,20 @@ Full documentation: https://wpmailsmtp.com/docs/how-to-set-up-the-other-smtp-mai
 | `bpwp_wp_disallow_file_mods`  | Disable Plugin and Theme Update and Installation? | Default: `true`  |
 | `bpwp_wp_disable_autoupdates` | Disable Wordpress auto-updates using [Easy Updates Manager](https://wordpress.org/plugins/stops-core-theme-and-plugin-updates/) plugin | Default: `true` |
 | `bpwp_wp_custom_user_config`  | Custom PHP code to be added to `wp-config.php`    | Empty by default |
+
+
+### Files upload mechanism
+There are two mechanism available for uploading your Wordpress files to remote server.
+
+| Ansible Variable    | Default value |
+|---------------------|---------------|
+| `bpwp_sync_method` | `rsync` |
+
+| Value   | Description/Usage case                                                                                                                            |
+|---------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| `rsync` | Uses [rsync](http://rsync.samba.org/) via [Ansible `synchronize` module](https://docs.ansible.com/ansible/latest/modules/synchronize_module.html) |
+| `copy`  | Uses [Ansible `copy` module](https://docs.ansible.com/ansible/latest/modules/copy_module.html)                                                    |
+
 
 ## License
 

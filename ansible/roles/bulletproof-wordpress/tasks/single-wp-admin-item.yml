@@ -2,6 +2,7 @@
 
 - set_fact:
     item_abspath: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ item }}"
+
 - name: "BPWP | Stat '{{ item }}'"
   stat: path="{{ item_abspath }}"
   register: bpwp_stat_wp_admin_item
@@ -25,7 +26,7 @@
     - bpwp_wp_symlink_core is true
 
 - name: "BPWP | Create '{{ item }}' symlink"  # noqa 305
-  shell: "ln -s ../{{ bpwp_dir_wordpress }}/{{ item }} ./{{ item }}"
+  shell: "ln -s ../{{ bpwp_dir_wordpress }}/{{ item }} ./{{ item|regex_replace('/$', '') }}"
   args:
     chdir: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}"
     warn: false
@@ -34,7 +35,7 @@
     - (not bpwp_stat_wp_admin_item.stat.exists) or (bpwp_stat_wp_admin_item.stat.exists and not bpwp_stat_wp_admin_item.stat.islnk)  # yamllint disable-line rule:line-length
 
 - name: "BPWP | Move '{{ item }}' to '{{ bpwp_public_html_dir_name }}'"  # noqa 305
-  shell: "mv -f ./{{ bpwp_dir_wordpress }}/{{ item }} ./{{ bpwp_public_html_dir_name }}/"
+  shell: "mv -f ./{{ bpwp_dir_wordpress }}/{{ item|regex_replace('/$', '') }} ./{{ bpwp_public_html_dir_name }}/"
   args:
     chdir: "{{ bpwp_remote_wordpress_home_dir }}"
   when: bpwp_wp_symlink_core is false

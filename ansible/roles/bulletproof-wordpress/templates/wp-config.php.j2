@@ -37,15 +37,20 @@ define('WPMS_MAIL_FROM_NAME_FORCE', {% if bpwp_smtp_mail_from_force %}true{% els
 define('WPMS_SET_RETURN_PATH',      {% if bpwp_smtp_set_return_path %}true{% else %}false{% endif %});
 define('WPMS_MAILER',               '{% if bpwp_smtp_mailer == 'php' %}mail{% else %}{{ bpwp_smtp_mailer }}{% endif %}');
 
+{% if bpwp_smtp_mailer == 'smtp.com' %}
 define('WPMS_SMTPCOM_API_KEY',      '{{ bpwp_smtp_smtpcom_api_key|default('') }}');
 define('WPMS_SMTPCOM_CHANNEL',      '{{ bpwp_smtp_smtpcom_channel|default('') }}');
+{% elif bpwp_smtp_mailer == 'pepipost' %}
 define('WPMS_PEPIPOST_API_KEY',     '{{ bpwp_smtp_pepipost_api_key|default('') }}');
+{% elif bpwp_smtp_mailer == 'sendinblue' %}
 define('WPMS_SENDINBLUE_API_KEY',   '{{ bpwp_smtp_sendinblue_api_key|default('') }}');
+{% elif bpwp_smtp_mailer == 'mailgun' %}
 define('WPMS_MAILGUN_API_KEY',      '{{ bpwp_smtp_mailgun_api_key|default('') }}');
 define('WPMS_MAILGUN_DOMAIN',       '{{ bpwp_smtp_mailgun_domain|default('') }}');
 define('WPMS_MAILGUN_REGION',       '{{ bpwp_smtp_mailgun_region }}');
+{% elif bpwp_smtp_mailer == 'sendgrid' %}
 define('WPMS_SENDGRID_API_KEY',     '{{ bpwp_smtp_sendgrid_api_key|default('') }}');
-
+{% elif bpwp_smtp_mailer == 'smtp' %}
 define('WPMS_SMTP_HOST',            '{{ bpwp_smtp_host }}');
 define('WPMS_SMTP_PORT',            {{ bpwp_smtp_port }});
 define('WPMS_SSL',                  '{% if bpwp_smtp_ssl %}{{ bpwp_smtp_ssl }}{% endif %}');
@@ -53,6 +58,7 @@ define('WPMS_SMTP_AUTOTLS',         {% if bpwp_smtp_autotls %}true{% else %}fals
 define('WPMS_SMTP_AUTH',            {% if bpwp_smtp_auth %}true{% else %}false{% endif %});
 define('WPMS_SMTP_USER',            '{{ bpwp_smtp_user }}');
 define('WPMS_SMTP_PASS',            '{{ bpwp_smtp_pass }}');
+{% endif %}
 {% endif %}
 
 // danie1k/bulletproof-wordpress
