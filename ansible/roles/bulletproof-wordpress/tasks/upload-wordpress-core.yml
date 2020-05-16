@@ -23,5 +23,13 @@
         chdir: "{{ bpwp_dest.wordpress }}{{ bpwp_wp_admin_dir_name }}"
   when: bpwp_wp_admin_dir_name != 'wp-admin'
 
+- set_fact:
+    bpwp_known_wp_core_files: "{{ bpwp_known_wp_core_files + ['wp-admin/'] }}"
+  when: bpwp_wp_admin_dir_name == 'wp-admin'
+
+- set_fact:
+    bpwp_known_wp_core_files: "{{ bpwp_known_wp_core_files + [bpwp_wp_admin_dir_name+'/'] }}"
+  when: bpwp_wp_admin_dir_name != 'wp-admin'
+
 - include_tasks: single-wp-admin-item.yml
   with_items: "{{ bpwp_known_wp_core_files }}"
