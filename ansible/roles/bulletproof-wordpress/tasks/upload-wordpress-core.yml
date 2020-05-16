@@ -12,17 +12,6 @@
 - include_tasks: upload-files.yml
   with_items: "{{ bpwp_wp_core_paths_to_upload }}"
 
-- block:
-    - name: "BPWP | Rename 'wp-admin' references in files to '{{ bpwp_wp_admin_dir_name }}'"
-      shell: "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/wp-admin/{{ bpwp_wp_admin_dir_name }}/g' {} \\;"  # yamllint disable-line rule:line-length
-      args:
-        chdir: "{{ bpwp_dest.wordpress }}{{ bpwp_wp_admin_dir_name }}"
-    - name: "BPWP | Fix some '{{ bpwp_wp_admin_dir_name }}' files, because previous command is not perfect"
-      shell: "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/class-{{ bpwp_wp_admin_dir_name }}/class-wp-admin/g' {} \\;"  # yamllint disable-line rule:line-length
-      args:
-        chdir: "{{ bpwp_dest.wordpress }}{{ bpwp_wp_admin_dir_name }}"
-  when: bpwp_wp_admin_dir_name != 'wp-admin'
-
 - set_fact:
     bpwp_known_wp_core_files: "{{ bpwp_known_wp_core_files + ['wp-admin/'] }}"
   when: bpwp_wp_admin_dir_name == 'wp-admin'

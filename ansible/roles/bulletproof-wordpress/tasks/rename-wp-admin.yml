@@ -1,0 +1,15 @@
+---
+
+- block:
+    - name: "BPWP | Rename 'wp-admin' references in files to '{{ bpwp_wp_admin_dir_name }}'"
+      shell: "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/wp-admin/{{ bpwp_wp_admin_dir_name }}/g' {} \\;"  # yamllint disable-line rule:line-length
+      args:
+        chdir: "{{ bpwp_remote_wordpress_home_dir }}"
+    - name: "BPWP | Fix back some '{{ bpwp_wp_admin_dir_name }}' -> 'wp-admin', because previous command is not perfect"
+      shell: "{{ item }}"
+      args:
+        chdir: "{{ bpwp_remote_wordpress_home_dir }}"
+      with_items:
+        - "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i -r 's/class-(.*?)({{ bpwp_wp_admin_dir_name }})/class-\\1wp-admin/g' {} \\;"  # yamllint disable-line rule:line-length
+        - "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/{{ bpwp_wp_admin_dir_name }}-bar-/wp-admin-bar-/g' {} \\;"  # yamllint disable-line rule:line-length
+  when: bpwp_wp_admin_dir_name != 'wp-admin'
