@@ -5,7 +5,7 @@
       shell: "find . -type f \\( -name '*.php' -o -name '*.html' -o -name '*.js' \\) -exec sed -i 's/wp-admin/{{ bpwp_wp_admin_dir_name }}/g' {} \\;"  # yamllint disable-line rule:line-length
       args:
         chdir: "{{ bpwp_remote_wordpress_home_dir }}"
-    - name: "BPWP | Fix back some '{{ bpwp_wp_admin_dir_name }}' -> 'wp-admin', because previous command is not perfect"
+    - name: "BPWP | Fix back '{{ bpwp_wp_admin_dir_name }}' -> 'wp-admin', previous command is not perfect"  # noqa 305
       shell: "{{ item }}"
       args:
         chdir: "{{ bpwp_remote_wordpress_home_dir }}"

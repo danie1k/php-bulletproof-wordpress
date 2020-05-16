@@ -14,27 +14,27 @@
       │ Warning! All remote files will be overwritten if target path exist.
       │
       ├─┬──────────────────────╼ Languages: {{ bpwp_dest.languages }}
-      │ ├> {{ bpwp_project_dir_name}}{{ bpwp_src.languages_bpwp|replace(bpwp_project_home_dir, '') }}*
-      │ └> {{ bpwp_project_dir_name}}{{ bpwp_src.languages_user|replace(bpwp_project_home_dir, '') }}*
+      │ ├> {{ bpwp_project_dir_name }}{{ bpwp_src.languages_bpwp|replace(bpwp_project_home_dir, '') }}*
+      │ └> {{ bpwp_project_dir_name }}{{ bpwp_src.languages_user|replace(bpwp_project_home_dir, '') }}*
       │
       ├─┬──────────────────────╼ MU Plugins: {{ bpwp_dest.mu_plugins }}
-      │ ├> {{ bpwp_project_dir_name}}{{ bpwp_src.mu_plugins_bpwp|replace(bpwp_project_home_dir, '') }}*
-      │ └> {{ bpwp_project_dir_name}}{{ bpwp_src.mu_plugins_user|replace(bpwp_project_home_dir, '') }}*
+      │ ├> {{ bpwp_project_dir_name }}{{ bpwp_src.mu_plugins_bpwp|replace(bpwp_project_home_dir, '') }}*
+      │ └> {{ bpwp_project_dir_name }}{{ bpwp_src.mu_plugins_user|replace(bpwp_project_home_dir, '') }}*
       │
       ├─┬──────────────────────╼ Plugins: {{ bpwp_dest.plugins }}
-      │ ├> {{ bpwp_project_dir_name}}{{ bpwp_src.plugins_bpwp|replace(bpwp_project_home_dir, '') }}*
-      │ └> {{ bpwp_project_dir_name}}{{ bpwp_src.plugins_user|replace(bpwp_project_home_dir, '') }}*
+      │ ├> {{ bpwp_project_dir_name }}{{ bpwp_src.plugins_bpwp|replace(bpwp_project_home_dir, '') }}*
+      │ └> {{ bpwp_project_dir_name }}{{ bpwp_src.plugins_user|replace(bpwp_project_home_dir, '') }}*
       │
       ├─┬──────────────────────╼ Themes: {{ bpwp_dest.themes }}
-      │ ├> {{ bpwp_project_dir_name}}{{ bpwp_src.themes_bpwp|replace(bpwp_project_home_dir, '') }}*
-      │ └> {{ bpwp_project_dir_name}}{{ bpwp_src.themes_user|replace(bpwp_project_home_dir, '') }}*
+      │ ├> {{ bpwp_project_dir_name }}{{ bpwp_src.themes_bpwp|replace(bpwp_project_home_dir, '') }}*
+      │ └> {{ bpwp_project_dir_name }}{{ bpwp_src.themes_user|replace(bpwp_project_home_dir, '') }}*
       │
-      ├─┬──────────────────────╼ Wordpress Core
-      │ ├> {{ bpwp_project_dir_name}}{{ bpwp_src.wordpress|replace(bpwp_project_home_dir, '') }}wp-admin/ => {{ bpwp_dest.wordpress }}{{ bpwp_wp_admin_dir_name }}/
-      │ └> {{ bpwp_project_dir_name}}{{ bpwp_src.wordpress|replace(bpwp_project_home_dir, '') }}* => {{ bpwp_dest.wordpress }}*
+      ├─┬──────────────────────╼ Wordpress Core: {{ bpwp_dest.wordpress }}
+      │ ├> {{ bpwp_project_dir_name }}{{ bpwp_src.wordpress|replace(bpwp_project_home_dir, '') }}*
+      │ └> wp-admin => {{ bpwp_wp_admin_dir_name }}
       │
       ├─┬──────────────────────╼ Composer Vendor: {{ bpwp_dest.vendor }}
-      │ └> {{ bpwp_project_dir_name}}{{ bpwp_src.vendor }}*
+      │ └> {{ bpwp_project_dir_name }}{{ bpwp_src.vendor }}*
       │
       └─────────────────────────────────────────────────────────────────────────────
 
@@ -100,9 +100,9 @@
 - name: "BPWP | Configure crontab for Wordpress Cron"
   cron:
     name: "{{ bpwp_project_name|upper }}"
-    minute: "{{ wp_cron_minute }}"
+    minute: "{{ bpwp_cron_minute }}"
     hour: "{{ bpwp_cron_hour }}"
-    day: "{{ wp_cron_day }}"
+    day: "{{ bpwp_cron_day }}"
     month: "{{ bpwp_cron_month }}"
     weekday: "{{ bpwp_cron_weekday }}"
     job: "wget -q -O - {{ bpwp_project_public_url }}/wp-cron.php?doing_wp_cron >/dev/null 2>&1"
