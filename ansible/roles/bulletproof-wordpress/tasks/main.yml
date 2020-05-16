@@ -97,15 +97,6 @@
     dest: "{{ bpwp_remote_wordpress_home_dir }}/wp-config.php"
     force: true
 
-- name: "BPWP | Configure Wordpress to look for wp-config.php in new place"
-  copy:
-    content: |
-      <?php
-      require_once ABSPATH.'..'.DIRECTORY_SEPARATOR.'wp-config.php';
-      require_once ABSPATH . 'wp-settings.php';"
-    dest: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/wp-config.php"
-    force: true
-
 - name: "BPWP | Configure crontab for Wordpress Cron"
   cron:
     name: "{{ bpwp_project_name|upper }}"

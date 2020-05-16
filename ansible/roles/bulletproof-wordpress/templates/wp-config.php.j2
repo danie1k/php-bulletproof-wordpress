@@ -127,3 +127,7 @@ define('DISALLOW_FILE_MODS', {% if bpwp_wp_disallow_file_mods %}true{% else %}fa
 // Custom user PHP code
 //-----------------------------------------------------
 {{ bpwp_wp_custom_user_config }}
+
+// Run Wordpress
+//-----------------------------------------------------
+include_once WWW_DIR.DIRECTORY_SEPARATOR.'wp-settings.php';
