@@ -1,2 +1,6 @@
+; This is your private file with your Wordpress server SSH access setting used by Ansible to do it's taksk.
+;
+; !! NEVER commit this file to any repository (even private!) or publish online !!
+;
 ; https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
 [bpwp-placeholder]
