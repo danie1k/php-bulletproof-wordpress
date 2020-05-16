@@ -67,9 +67,9 @@
       dest: "{{ bpwp_dest.languages }}"
     # mu-plugins
     - src: "{{ bpwp_src.mu_plugins_bpwp }}"
-      dest: "{{ bpwp_dest.mu_plugins}}"
+      dest: "{{ bpwp_dest.mu_plugins }}"
     - src: "{{ bpwp_src.mu_plugins_user }}"
-      dest: "{{ bpwp_dest.mu_plugins}}"
+      dest: "{{ bpwp_dest.mu_plugins }}"
     # plugins
     - src: "{{ bpwp_src.plugins_bpwp }}"
       dest: "{{ bpwp_dest.plugins }}"
@@ -88,7 +88,7 @@
 
 - name: "BPWP | Ensure '{{ bpwp_wp_plugins_dir_name }}' directory exists"
   file:
-    path: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{bpwp_wp_plugins_dir_name}}"
+    path: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/{{ bpwp_wp_plugins_dir_name }}"
     state: directory
 
 - name: "BPWP | Create wp-config.php file outside {{ bpwp_public_html_dir_name }} directory"
@@ -99,7 +99,10 @@
 
 - name: "BPWP | Configure Wordpress to look for wp-config.php in new place"
   copy:
-    content: "<?php require_once ABSPATH.'..'.DIRECTORY_SEPARATOR.'wp-config.php'; require_once ABSPATH . 'wp-settings.php';"
+    content: |
+      <?php
+      require_once ABSPATH.'..'.DIRECTORY_SEPARATOR.'wp-config.php';
+      require_once ABSPATH . 'wp-settings.php';"
     dest: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}/wp-config.php"
     force: true
 

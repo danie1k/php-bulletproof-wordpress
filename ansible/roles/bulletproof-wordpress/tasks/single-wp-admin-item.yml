@@ -10,22 +10,30 @@
   file:
     path: "{{ item_abspath }}"
     state: absent
-  when: bpwp_stat_wp_admin_item.stat.exists and bpwp_stat_wp_admin_item.stat.islnk and bpwp_wp_symlink_core is false
+  when:
+    - bpwp_stat_wp_admin_item.stat.exists
+    - bpwp_stat_wp_admin_item.stat.islnk
+    - bpwp_wp_symlink_core is false
 
-- name: "BPWP | Remove existing '{{ item }}' and prepare space for symlink"
+- name: "BPWP | Remove existing '{{ item }}' and prepare space for symlink"  # noqa 305
   shell: "rm -rf {{ item_abspath }}"
   args:
     warn: false
-  when: bpwp_stat_wp_admin_item.stat.exists and (not bpwp_stat_wp_admin_item.stat.islnk) and bpwp_wp_symlink_core is true
+  when:
+    - bpwp_stat_wp_admin_item.stat.exists
+    - (not bpwp_stat_wp_admin_item.stat.islnk)
+    - bpwp_wp_symlink_core is true
 
-- name: "BPWP | Create '{{ item }}' symlink"
+- name: "BPWP | Create '{{ item }}' symlink"  # noqa 305
   shell: "ln -s ../{{ bpwp_dir_wordpress }}/{{ item }} ./{{ item }}"
   args:
     chdir: "{{ bpwp_remote_wordpress_home_dir }}/{{ bpwp_public_html_dir_name }}"
     warn: false
-  when: (bpwp_wp_symlink_core is true) and ((not bpwp_stat_wp_admin_item.stat.exists) or (bpwp_stat_wp_admin_item.stat.exists and not bpwp_stat_wp_admin_item.stat.islnk))
+  when:
+    - bpwp_wp_symlink_core is true
+    - (not bpwp_stat_wp_admin_item.stat.exists) or (bpwp_stat_wp_admin_item.stat.exists and not bpwp_stat_wp_admin_item.stat.islnk)  # yamllint disable-line rule:line-length
 
-- name: "BPWP | Move '{{ item }}' to '{{ bpwp_public_html_dir_name }}'"
+- name: "BPWP | Move '{{ item }}' to '{{ bpwp_public_html_dir_name }}'"  # noqa 305
   shell: "mv -f ./{{ bpwp_dir_wordpress }}/{{ item }} ./{{ bpwp_public_html_dir_name }}/"
   args:
     chdir: "{{ bpwp_remote_wordpress_home_dir }}"
