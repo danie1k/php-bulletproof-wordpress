@@ -124,18 +124,7 @@
     state: absent
   when: not bpwp_custom_cron
 
-- name: "BPWP | Force disabling auto-updates mechanism"
-  copy:
-    src: bpwp-force-disable-autoupdates.php
-    dest: "{{ bpwp_dest.mu_plugins }}bpwp-force-disable-autoupdates.php"
-    force: true
-  when: bpwp_wp_disable_autoupdates
-
-- name: "BPWP | Ensure auto-updates are not forced to be disabled"
-  file:
-    path: "{{ bpwp_dest.mu_plugins }}bpwp-force-disable-autoupdates.php"
-    state: absent
-  when: not bpwp_wp_disable_autoupdates
+- include_tasks: autoupdates.yml
 
 - include_tasks: chmod.yml
   with_items:

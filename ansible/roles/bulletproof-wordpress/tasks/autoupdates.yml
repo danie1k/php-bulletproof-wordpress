@@ -1,0 +1,25 @@
+---
+
+- block:
+    - name: "BPWP | Download & install latest version of 'Easy Updates Manager' Wordpress plugin"
+      unarchive:
+        src: https://downloads.wordpress.org/plugin/stops-core-theme-and-plugin-updates.latest-stable.zip
+        dest: "{{ bpwp_dest.plugins }}"
+        remote_src: true
+    - name: "BPWP | Force 'Easy Updates Manager' plugin to be active & configured"
+      copy:
+        src: bpwp-force-stops-core-theme-and-plugin-updates.php
+        dest: "{{ bpwp_dest.mu_plugins }}bpwp-force-stops-core-theme-and-plugin-updates.php"
+        force: true
+  when: bpwp_wp_disable_autoupdates
+
+- block:
+    - name: "BPWP | Remove 'Easy Updates Manager' mu-plugin"
+      file:
+        path: "{{ bpwp_dest.mu_plugins }}bpwp-force-stops-core-theme-and-plugin-updates.php"
+        state: absent
+    - name: "BPWP | Remove 'Easy Updates Manager' plugin"
+      file:
+        path: "{{ bpwp_dest.plugins }}stops-core-theme-and-plugin-updates"
+        state: absent
+  when: not bpwp_wp_disable_autoupdates

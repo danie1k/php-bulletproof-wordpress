@@ -142,7 +142,6 @@ function _install_composer_requirements() {
         "johnpbloch/wordpress-core"
         "johnpbloch/wordpress-core-installer"
         "mnsami/composer-custom-directory-installer"
-        "wpackagist-plugin/stops-core-theme-and-plugin-updates"
     )
     composer -q require ${compoer_requirements[@]}
     _ok
