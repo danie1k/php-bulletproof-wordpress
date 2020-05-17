@@ -39,6 +39,12 @@ define('CACHE_DIR',                 WWW_DIR.DIRECTORY_SEPARATOR.'{{ bpwp_dir_cac
 define('MAGPIE_CACHE_DIR',          CACHE_DIR);
 {% if bpwp_smtp_enabled %}define('WP_CACHE',                  true);{% endif %}
 
+
+// Merge + Minify + Refresh (https://wordpress.org/plugins/merge-minify-refresh/)
+//-----------------------------------------------------
+define('MMR_CACHE_DIR', CACHE_DIR.DIRECTORY_SEPARATOR.'minify');
+define('MMR_CACHE_URL', '/{{ bpwp_dir_cache }}/minify');
+
 // W3 Total Cache
 //-----------------------------------------------------
 {% if bpwp_smtp_enabled %}
