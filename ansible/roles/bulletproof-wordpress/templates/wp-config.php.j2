@@ -48,6 +48,7 @@ define('W3TC_CONFIG_DIR',           CWD.DIRECTORY_SEPARATOR.'w3tc-config');
 // Disabled
 {% endif %}
 
+
 // WP Mail SMTP
 //======================================================================
 {% if bpwp_smtp_enabled %}
@@ -142,6 +143,8 @@ define('FORCE_SSL_LOGIN',    $_SERVER['HTTPS'] === 'on');
 define('FORCE_SSL_ADMIN',    $_SERVER['HTTPS'] === 'on');
 define('DISALLOW_FILE_EDIT', {% if bpwp_wp_disallow_file_edit %}true{% else %}false{% endif %});
 define('DISALLOW_FILE_MODS', {% if bpwp_wp_disallow_file_mods %}true{% else %}false{% endif %});
+{% if bpwp_wp_disable_autoupdates %}define('EASY_UPDATES_MANAGER_ADMIN_BAR', false);{% endif %}
+
 
 // Custom user PHP code
 //-----------------------------------------------------

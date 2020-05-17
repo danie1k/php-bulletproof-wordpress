@@ -25,3 +25,8 @@ add_action('pre_current_active_plugins', function () {
         }
     }
 }, 0);
+
+# Hide "Updates Options" link in admin dashboard
+add_action( 'admin_init', function() {
+    remove_submenu_page('index.php', 'mpsum-update-options');
+}, 999);
